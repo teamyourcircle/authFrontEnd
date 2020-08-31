@@ -1,0 +1,50 @@
+.header{
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+background-color: white;
+}
+.header_brand{
+    display: flex;
+    align-items: center;
+}
+.header_brand > img{
+    height: 80px;
+    object-fit: contain;
+    border-radius:50%;
+}
+
+.header_brand > h1{
+    font-size: 30px;
+    font-weight:bold;
+    margin-left:5px ;
+}
+.header_button{
+    margin-right: 10px;
+}
+.header_brand > .MuiSvgIcon-root{
+    font-size:40px;
+animation: image 2s infinite;
+}
+@keyframes image{
+    0%{
+        transform: rotate(0deg);
+        color: red;
+    }
+    20%{
+        color: rgb(243, 51, 51);
+    }
+    40%{
+        color: rgb(204, 65, 65);
+    }
+    60%{
+        color: rgb(240, 45, 45);
+    }
+    80%{
+        color: rgb(253, 74, 74);
+    }
+    100%{
+        transform: rotate(360deg);
+       color: red;
+    }
+}

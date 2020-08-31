@@ -1,0 +1,72 @@
+.login{
+    height:100vh;
+    background-color: #f8f8f8;
+    display: grid;
+    place-items: center;
+}
+.login_container > h2{
+    font-weight:700;
+}
+.login_container > button{
+    margin-top:50px;
+    text-transform: inherit !important;
+    width: 100%;
+    color: white;
+
+}
+.forgot{
+    float: right;
+    text-decoration: none;
+
+}
+.link{
+    text-decoration: none;
+font-weight: bold;
+}
+.login_container{
+    padding:80px;
+    text-align: center;
+    background-color:rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),0 1px 2px rgba(0, 0, 0, 0.24);
+
+}
+.icon > .MuiSvgIcon-root{
+color: green;
+font-size: 60px;
+}
+.id{
+    display: flex;
+    align-items: center;
+}
+.id > p{
+    margin-left: 10px;
+    font-weight: 500;
+   font-size: 20px;
+}
+.login_container > .MuiSvgIcon-root{
+    font-size:60px;
+animation: image 6s infinite;
+}
+@keyframes image{
+    0%{
+        transform: rotate(0deg);
+        color: red;
+    }
+    20%{
+        color: rgb(243, 51, 51);
+    }
+    40%{
+        color: rgb(204, 65, 65);
+    }
+    60%{
+        color: rgb(240, 45, 45);
+    }
+    80%{
+        color: rgb(253, 74, 74);
+    }
+    100%{
+        transform: rotate(360deg);
+       color: red;
+    }
+}
