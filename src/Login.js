@@ -31,6 +31,7 @@ function Login() {
         event.preventDefault();
       };
       const [values, setValues] = React.useState({
+        email:'',
         amount: '',
         password: '',
         weight: '',
@@ -38,17 +39,53 @@ function Login() {
         showPassword: false,
       });
         const classes = useStyles();
-    return (
+  const postData = (e) =>{
+
+      e.preventDefault();
+      const data = {
+        email:values.email,
+        password:values.password
+      }
+
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type':  'application/json'
+        },
+        body: JSON.stringify(data)
+        
+        }
+      if(data.email!="" && data.password!=""){
+        console.log(data);
+
+        fetch('http://localhost:5000/api/signin',options).then(response => response.json()).then(data => console.log(data));
+
+
+
+
+      }
+      else{
+        console.log({"_msg":"Data Body Empty !"});
+      }
+
+
+  }
+  
+  
+        return (
       <div className="login">
       <div className="login_container">
     <CachedIcon/>
       <h2>Welcome To CIRCLE</h2>
+      <form onSubmit={postData}>
       <TextField
       fullWidth
           className={classes.margin}
           label="E-Mail"
           variant="outlined"
           id="mui-theme-provider-outlined-input"
+          value={values.email}
+          onChange = {handleChange('email')}
         />
         <FormControl fullWidth className={clsx(classes.margin, classes.textField)} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
@@ -79,7 +116,9 @@ function Login() {
       className={classes.button}
       size="large"
       color="secondary"
+      type="submit"
       value="submit">Login</Button>
+      </form>
           <p>Don't Have an Accounr?
 <Link to="/signup" className="link">Sign Up</Link></p>
           </div>

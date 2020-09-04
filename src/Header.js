@@ -9,7 +9,7 @@ function Header() {
           margin: theme.spacing(1),
         },
       }));
-    const classes = useStyles();
+    //const classes = useStyles();
     return (
     <nav className="header">
       <div className="header_brand">

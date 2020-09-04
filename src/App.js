@@ -6,13 +6,14 @@ import Quote from './Quote';
 import SignUp from './SignUp';
 import Header from './Header';
 import Login from './Login';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Facebook from './Banner'
 import Host  from './Host';
 import SignOut from './SignOut'
 import PasswordRest from './PasswordReset'
 import ReactVirtualizedTable from './Table'
-
+import CustomizedSnackbars from './Snakbar';
+import Dashboard from './Dashboard'
 function App() {
    return (
       <div className="app">
@@ -48,13 +49,14 @@ function App() {
 </div>
 
        </Route>
-       <Route path="/signout">
-          <SignOut/>
-       </Route>
+       <Route path="/signout"><SignOut/></Route>
        <Route path="/forgot_password"><ForgotPassword/></Route>
-       <Route path="/verify_password"><PasswordRest/></Route>
+       <Route path="/verify_password"><CustomizedSnackbars/><PasswordRest/></Route>
        <Route path="/admin"><Header /><ReactVirtualizedTable/></Route>
-         <Route path="/"><Header /></Route>
+       <Route path="/dashboard"><Header /><Dashboard/></Route>
+      <Route path="/"><Header />
+      <Link to="/signup">Get Started</Link>
+      </Route>
 
          </Switch>
          </Router>

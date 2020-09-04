@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import CachedIcon from '@material-ui/icons/Cached';
@@ -17,8 +17,7 @@ function SignUp() {
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
       };
-    
-    
+  
     const useStyles = makeStyles((theme) => ({
         margin: {
           margin: theme.spacing(1),
@@ -27,29 +26,79 @@ function SignUp() {
       const handleClickShowPassword = () => {
         setValues({ ...values, showPassword: !values.showPassword });
       };
+      const handleClickShowRepeatPassword = () => {
+        setValues({ ...values, showRepeatPassword: !values.showRepeatPassword });
+      };
       const handleMouseDownPassword = (event) => {
         event.preventDefault();
       };
+      /*This is The Whole Data Set for This Component */
       const [values, setValues] = React.useState({
+        email: '',
         amount: '',
         password: '',
+        repeat_password: '',
         weight: '',
         weightRange: '',
         showPassword: false,
+        showRepeatPassword: false
       });
+
+
+const compare  = (p1,p2) => {
+
+if(p1==p2){
+  
+  return true; 
+}
+return false;
+}       
+
+const postData = (e) =>{
+e.preventDefault();
+const is_same = compare(values.password,values.repeat_password);
+if(is_same && values.email!="" && values.password!="" && values.repeat_password!=""){
+ 
+const data = {
+  "email": values.email ,
+  "password": values.password
+}  
+console.log(data);
+const options = {
+method: 'POST',
+headers: {
+  'Content-Type':  'application/json'
+},
+body: JSON.stringify(data)
+
+}
+
+fetch('http://localhost:5000/api/signup',options).then(response => response.json()).then(data => console.log(data));
+
+}
+else{
+  console.log('Password not Match or empty Data !')
+}
+
+
+}
         const classes = useStyles();
     return (
       <div className="login">
+        
       <div className="login_container">
     <CachedIcon/>
       <h2>Welcome To CIRCLE</h2>
+      <form onSubmit={postData}>
       <TextField
       fullWidth
           className={classes.margin}
           label="E-Mail"
           variant="outlined"
           id="mui-theme-provider-outlined-input"
+          onChange={handleChange('email')}
         />
+        
         <FormControl fullWidth className={clsx(classes.margin, classes.textField)} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
@@ -76,18 +125,18 @@ function SignUp() {
           <InputLabel htmlFor="outlined-adornment-password">Repeat Password</InputLabel>
           <OutlinedInput
             id="outlined-adornment-password"
-            type={values.showPassword ? 'text' : 'password'}
-            value={values.password}
-            onChange={handleChange('password')}
+            type={values.showRepeatPassword ? 'text' : 'password'}
+            value={values.repeat_password}
+            onChange={handleChange('repeat_password')}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
+                  onClick={handleClickShowRepeatPassword}
                   onMouseDown={handleMouseDownPassword}
                   edge="end"
                 >
-                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                  {values.showRepeatPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
               </InputAdornment>
             }
@@ -101,7 +150,10 @@ function SignUp() {
       className={classes.button}
       size="large"
       color="secondary"
-      value="submit">Sign Up</Button>
+      value="submit"
+      type="submit"
+      >Sign Up</Button>
+      </form>
 <p>Already have an Account?
 <Link to="/login" className="link">Log In</Link></p>
           </div>
