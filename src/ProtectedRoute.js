@@ -4,7 +4,7 @@ import {AuthContext} from './AuthContext'
 import Header from './Header'
 
 function ProtectedRoute({component:Component , ...rest}) {
-    const [is_Auth,setAuth,token] = useContext(AuthContext);
+    const [is_Auth,setAuth,token,setToken] = useContext(AuthContext);
     
     return (
         <Route {...rest} render={(props) =>{

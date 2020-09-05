@@ -35,7 +35,9 @@ function App() {
    
 </div>
          </Route>
+         
          <Route path="/login"><Login /></Route> 
+       
        <Route path="/host">
        <Header />
        <div className="app_join">
@@ -52,7 +54,7 @@ function App() {
 
        </Route>
        <AuthContextProvider>
-       <Route path="/signout"><SignOut/></Route>
+       <ProtectedRoute path="/signout" component={SignOut} />
        <ProtectedRoute path="/dashboard" component={Dashboard} />
        </AuthContextProvider>
 

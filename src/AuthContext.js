@@ -1,4 +1,5 @@
 import React,{useState, createContext} from 'react';
+import Login from './Login'
 
 export const AuthContext = createContext() ;
 
@@ -13,8 +14,9 @@ return ;
 }
 
     return (
-        <AuthContext.Provider value={[is_Auth,setAuth,token]}>
+        <AuthContext.Provider value={[is_Auth,setAuth,token,setToken]}>
             {props.children}
+            
         </AuthContext.Provider>
     );
 }

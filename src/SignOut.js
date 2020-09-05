@@ -12,7 +12,7 @@ import {AuthContext} from './AuthContext'
 function SignOut() {
 
 //this is the token comming from the header .
-const [is_Auth,setAuth,token] = useContext(AuthContext);
+const [is_Auth,setAuth,token,setToken] = useContext(AuthContext);
 
 const [email,setEmail] = useState('');
 
@@ -26,7 +26,12 @@ const options = {
 };
 
 useEffect(() => {
-console.log('logging out !');  
+console.log('logging out !');
+// now user not authenticated 
+setAuth(false);
+//now no token is there 
+setToken('');
+
 fetch('http://localhost:5000/api/logout',options).then(response => response.json()).then(data => setEmail(data.email))
 } , []);
     const useStyles = makeStyles((theme) => ({
