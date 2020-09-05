@@ -66,14 +66,19 @@ function Login() {
         
         console.log(data);
 
+        // Hardik contributions Starts from here .
+
+        //TODO basically our work is to fetch this api data
+        //and in response headers there is access-token: token
+        //you have to take that token and put  that into Cokkie 
+        //through js-cookie [npm package]
         fetch('http://localhost:5000/api/signin',options).then(response => 
-          
         //console.log(response.headers);  
         response.json()
       ).then(data => console.log(data));
 
 
-
+        //Hardik contribution ends 
 
       }
       else{
