@@ -14,6 +14,7 @@ import PasswordRest from './PasswordReset'
 import ReactVirtualizedTable from './Table'
 import CustomizedSnackbars from './Snakbar';
 import Dashboard from './Dashboard'
+import { AuthContextProvider } from './AuthContext';
 function App() {
    return (
       <div className="app">
@@ -49,11 +50,15 @@ function App() {
 </div>
 
        </Route>
+       <AuthContextProvider>
        <Route path="/signout"><SignOut/></Route>
+       <Route path="/dashboard"><Header /><Dashboard/></Route>
+       </AuthContextProvider>
+
        <Route path="/forgot_password"><ForgotPassword/></Route>
        <Route path="/verify_password"><CustomizedSnackbars/><PasswordRest/></Route>
        <Route path="/admin"><Header /><ReactVirtualizedTable/></Route>
-       <Route path="/dashboard"><Header /><Dashboard/></Route>
+       
       <Route path="/"><Header />
       <Link to="/signup">Get Started</Link>
       </Route>

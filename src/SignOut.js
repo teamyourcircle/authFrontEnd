@@ -1,18 +1,19 @@
-import React,{useEffect,useState} from 'react';
+import React,{useContext,useEffect,useState} from 'react';
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles';
 import CachedIcon from '@material-ui/icons/Cached';
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import {Avatar} from '@material-ui/core'
 import './SignOut.css'
-
+import {AuthContext} from './AuthContext'
 
 
 
 function SignOut() {
 
 //this is the token comming from the header .
-const [token,setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjUxYmIzZWY1ZmQ0MDExYjQ2ODA5NzAiLCJpYXQiOjE1OTkxOTE5NzJ9.cI6bcVLIR7cfwGImnH38lZzOcA_IoCFiO5h8p6fnW78')
+const [is_Auth,setAuth,token] = useContext(AuthContext);
+
 const [email,setEmail] = useState('');
 
 const options = {
@@ -28,12 +29,6 @@ useEffect(() => {
 console.log('logging out !');  
 fetch('http://localhost:5000/api/logout',options).then(response => response.json()).then(data => setEmail(data.email))
 } , []);
-
-
-
-
-
-
     const useStyles = makeStyles((theme) => ({
     
       container: {

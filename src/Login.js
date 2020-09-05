@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import CachedIcon from '@material-ui/icons/Cached';
@@ -13,7 +13,14 @@ import clsx from 'clsx';
 import Button from '@material-ui/core/Button'
 import {Link} from 'react-router-dom'
 import './Login.css'
+import {AuthContext} from './AuthContext'
+
+
 function Login() {
+
+const [is_Auth,setAuth, token, setToken] = useContext(AuthContext);
+
+
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
       };
@@ -56,6 +63,7 @@ function Login() {
         
         }
       if(data.email!="" && data.password!=""){
+        
         console.log(data);
 
         fetch('http://localhost:5000/api/signin',options).then(response => response.json()).then(data => console.log(data));
