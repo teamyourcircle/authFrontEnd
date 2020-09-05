@@ -54,7 +54,7 @@ function App() {
 
        </Route>
        <AuthContextProvider>
-       <ProtectedRoute path="/signout" component={SignOut} />
+       <Route path="/signout"><SignOut /></Route>
        <ProtectedRoute path="/dashboard" component={Dashboard} />
        </AuthContextProvider>
 

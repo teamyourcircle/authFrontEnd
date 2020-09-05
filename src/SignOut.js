@@ -29,11 +29,11 @@ useEffect(() => {
 console.log('logging out !');
 // now user not authenticated 
 setAuth(false);
-//now no token is there 
-setToken('');
 
+//status 
+console.log("is Authenticated "+is_Auth); 
 fetch('http://localhost:5000/api/logout',options).then(response => response.json()).then(data => setEmail(data.email))
-} , []);
+} , [is_Auth]);
     const useStyles = makeStyles((theme) => ({
     
       container: {

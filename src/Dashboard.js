@@ -25,10 +25,10 @@ const options = {
 const [email,setEmail] = useState('');
 
   useEffect(() =>{
-
+  console.log("is Authenticated "+is_Auth);  
   fetch(url, options).then(response => response.json()).then(data => setEmail(data.email))
 
-  }, [])
+  }, [is_Auth])
 
 
   const useStyles = makeStyles((theme) => ({

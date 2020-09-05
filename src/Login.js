@@ -14,7 +14,7 @@ import Button from '@material-ui/core/Button'
 import {Link} from 'react-router-dom'
 import './Login.css'
 import {AuthContext} from './AuthContext'
-
+import Cookies from 'js-cookie'
 
 function Login() {
 
@@ -66,7 +66,11 @@ function Login() {
         
         console.log(data);
 
-        fetch('http://localhost:5000/api/signin',options).then(response => response.json()).then(data => console.log(data));
+        fetch('http://localhost:5000/api/signin',options).then(response => 
+          
+        //console.log(response.headers);  
+        response.json()
+      ).then(data => console.log(data));
 
 
 
