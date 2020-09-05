@@ -15,6 +15,7 @@ import ReactVirtualizedTable from './Table'
 import CustomizedSnackbars from './Snakbar';
 import Dashboard from './Dashboard'
 import { AuthContextProvider } from './AuthContext';
+import ProtectedRoute from './ProtectedRoute';
 function App() {
    return (
       <div className="app">
@@ -52,7 +53,7 @@ function App() {
        </Route>
        <AuthContextProvider>
        <Route path="/signout"><SignOut/></Route>
-       <Route path="/dashboard"><Header /><Dashboard/></Route>
+       <ProtectedRoute path="/dashboard" component={Dashboard} />
        </AuthContextProvider>
 
        <Route path="/forgot_password"><ForgotPassword/></Route>
