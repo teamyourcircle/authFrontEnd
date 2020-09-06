@@ -16,12 +16,14 @@ import CustomizedSnackbars from './Snakbar';
 import Dashboard from './Dashboard'
 import { AuthContextProvider } from './AuthContext';
 import ProtectedRoute from './ProtectedRoute';
+import ProfileAvatar from './ProfileAvatar'
 function App() {
    return (
       <div className="app">
          <Router>
          <Switch>
          <Route path="/signup"><SignUp /></Route>
+         <Route path="/upload"><ProfileAvatar /></Route>
          <Route exact path="/join"><Header />
          <div className="app_join">
          <div className="app_join_right">
