@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React,{useEffect, useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import CachedIcon from '@material-ui/icons/Cached';
@@ -14,13 +14,15 @@ import Button from '@material-ui/core/Button'
 import {Link} from 'react-router-dom'
 import './Login.css'
 import {AuthContext} from './AuthContext'
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 
 function Login() {
 
-//const [is_Auth,setAuth, token, setToken] = useContext(AuthContext);
+const [isAuth,setAuth] = useState(false);
 
-
+    useEffect(() => {
+      setAuth(true)
+    },[])
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
       };
@@ -62,6 +64,7 @@ function Login() {
         body: JSON.stringify(data)
         
         }
+        
       if(data.email!="" && data.password!=""){
         
         console.log(data);
@@ -72,19 +75,27 @@ function Login() {
         //and in response headers there is access-token: token
         //you have to take that token and put  that into Cokkie 
         //through js-cookie [npm package]
-        fetch('http://localhost:5000/api/signin',options).then(response => 
-        //console.log(response.headers);  
-        response.json()
-      ).then(data => console.log(data));
-
-
+        
+        fetch('http://localhost:5000/api/signin',options).then(response => {
+          // console.log("MyToken ",response.json())
+          
+           return response.json();
+          }).then(data => {
+            console.log(data.msg)
+            Cookies.set("Token", data.token)
+            // console.log('isAuth ',!isAuth)
+            Cookies.set("isAuth",isAuth)
+            console.log("Cookie created !")
+          })
         //Hardik contribution ends 
-
+        
       }
       else{
         console.log({"_msg":"Data Body Empty !"});
       }
-
+      // const getToken = (req, res, next) => {
+        
+      // }
 
   }
   
@@ -137,7 +148,7 @@ function Login() {
       value="submit">Login</Button>
       </form>
           <p>Don't Have an Accounr?
-<Link to="/signup" className="link">Sign Up</Link></p>
+      <Link to="/signup" className="link">Sign Up</Link></p>
           </div>
   </div>
     );
