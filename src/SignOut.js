@@ -6,7 +6,7 @@ import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import {Avatar} from '@material-ui/core'
 import './SignOut.css'
 import {AuthContext} from './AuthContext'
-
+import Cookie from 'js-cookie';
 
 
 function SignOut() {
@@ -15,7 +15,7 @@ function SignOut() {
 const [is_Auth,setAuth,token,setToken] = useContext(AuthContext);
 
 const [email,setEmail] = useState('');
-
+//console.log('token is:',token);
 const options = {
   method: 'GET',
   headers:{
@@ -24,11 +24,12 @@ const options = {
     'Accept': 'application/json'
   }
 };
-
 useEffect(() => {
 console.log('logging out !');
-// now user not authenticated 
+// now user not authenticated
 setAuth(false);
+Cookie.remove('isAuth');
+Cookie.remove('Token');
 
 //status 
 console.log("is Authenticated "+is_Auth); 
