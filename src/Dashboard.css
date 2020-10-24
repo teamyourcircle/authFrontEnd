@@ -1,5 +1,21 @@
 .dashboard{
-    display: grid;
-    place-items: center;
     margin-top: 20px;
+    display:flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.dashboard_info{
+display: flex;
+align-items: center;
+flex-direction: column;
+}
+.dashboard_info > p{
+    font-weight: 500;
+    font-size: 20px;
+}
+.product{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }

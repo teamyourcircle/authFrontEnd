@@ -10,6 +10,7 @@ import CustomizedSnackbars from './Snakbar';
 import Dashboard from './Dashboard'
 import { AuthContextProvider } from './AuthContext';
 import ProtectedRoute from './ProtectedRoute';
+
 function App() {
    return (
 <div className="app">

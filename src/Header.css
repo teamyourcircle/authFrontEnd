@@ -3,6 +3,7 @@
    align-items: center;
    justify-content: space-between;
 background-color: white;
+height: 100px;
 }
 .header_brand{
     display: flex;
@@ -17,34 +18,26 @@ background-color: white;
 .header_brand > h1{
     font-size: 30px;
     font-weight:bold;
-    margin-left:5px ;
+    margin-left: -64px;
 }
 .header_button{
     margin-right: 10px;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
 }
-.header_brand > .MuiSvgIcon-root{
+.header_brand > img{
     font-size:40px;
-animation: image 2s infinite;
+animation: image 3s infinite;
+margin-left: -44px;
 }
 @keyframes image{
     0%{
         transform: rotate(0deg);
-        color: red;
+
     }
-    20%{
-        color: rgb(243, 51, 51);
-    }
-    40%{
-        color: rgb(204, 65, 65);
-    }
-    60%{
-        color: rgb(240, 45, 45);
-    }
-    80%{
-        color: rgb(253, 74, 74);
-    }
+
     100%{
         transform: rotate(360deg);
-       color: red;
-    }
+        }
 }
