@@ -58,7 +58,7 @@ function ForgotPassword() {
       <div className="login_container">
     <CachedIcon/>
       <h2>Reset Your Password</h2>
-      <p style={{fontWeight:'600'}}>Enter your user account's verified email 
+      <p style={{fontWeight:'600'}}>Enter your Registered email 
           <br />address and we will send you a password reset link.</p>
       <TextField
       fullWidth
