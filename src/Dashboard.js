@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { AuthContext} from './AuthContext'
 import Button from '@material-ui/core/Button';
 import MediaCard from './MediaCard'
+import CustomizedSnackbars from './Snakbar';
 
 
 function Dashboard() {
@@ -14,8 +15,8 @@ function Dashboard() {
   const url = 'http://localhost:5000/api/users/dashboard'
  
 
-  //this is the token comming from the header .
 const [is_Auth,setAuth,token,setToken] = useContext(AuthContext);
+const [isLoaded,setisLoaded] = useState(false);  
 const options = {
   method: 'GET',
   headers:{
@@ -25,13 +26,30 @@ const options = {
   }
 };
 const [email,setEmail] = useState('');
-
+const [isVerified,setisVerified] = useState(true);
   useEffect(() =>{
-  console.log("is Authenticated ",is_Auth);  
-  fetch(url, options).then(response => response.json()).then(data => setEmail(data.email))
+  fetch(url, options).then(response => response.json()).then(data => {
+    setEmail(data.email);
+    setisVerified(data.isverified);
+    setisLoaded(true);
+    console.log(data);
+  })
 
   }, [is_Auth])
-
+  //create token 
+  const sendLink = async () =>{
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type':  'application/json'
+      },
+      body: JSON.stringify({"email":email})
+      
+      }
+    const res = await fetch("http://localhost:5000/api/create/token", options);
+    const data = await res.json();
+    console.log(data);
+  }
 
   const useStyles = makeStyles((theme) => ({
         root: {
@@ -45,6 +63,15 @@ const [email,setEmail] = useState('');
       }));
       const classes = useStyles();
     return (
+      <React.Fragment>
+        <div>
+        {!isVerified ?  (<React.Fragment><CustomizedSnackbars severity={"warning"} content={"Your Email is not Verified !"}/>
+          <Button onClick={sendLink}>
+              Send Link Again
+          </Button>
+          
+          </React.Fragment>) : (null)}
+        </div>
       <div className="dash">
         <div className="dashboard">
           <div className="dashboard_info">
@@ -54,7 +81,9 @@ const [email,setEmail] = useState('');
         <Avatar style={{width:'150px',height:'150px'}} src="" alt="User-profile"/>
         </IconButton>
       </label>
-    <p>{email}</p>
+    {
+    isLoaded ? (<p>{email}</p>): (<Skeleton variant="text" width={400} height={40}/>)
+    }
     </div>
     <div className="dashboard_button">
     <Button variant="contained" color="secondary" size="large" style={{padding:'10px 40px',fontSize:'18px'}}>
@@ -75,21 +104,14 @@ const [email,setEmail] = useState('');
         description="Form survey service - form survey service will help you in creating a 
         quick form with Rich field types and help you to create quality Decision with simple visualizing tool."
         />
-               <MediaCard 
-        img="https://i.ibb.co/qC0jXwb/Black-White-and-Triangle-Data-Chase-Games-Logo-2.png"
-        name="Live Play"
-        description="Webinar service - help in creating quick webinar in real time 
-        mode and can be attend virtually after that interaction supported for people aim to Target there desired audience by quality interaction ."
-        />
-      
 
       </div>
-      
-         {/*   <Skeleton variant="circle" width={150} height={150} />
-            <Skeleton variant="text" width={500} height={40}/>*/}
+
+       
         
 
 </div>
+</React.Fragment>
     );
 }
 

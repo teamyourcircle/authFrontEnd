@@ -1,5 +1,4 @@
 import React,{useState, createContext} from 'react';
-import Login from './Login';
 import Cookies from 'js-cookie';
 
 export const AuthContext = createContext() ;

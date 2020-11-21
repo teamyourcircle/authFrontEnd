@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react';
+import React,{useContext, useEffect, useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import CachedIcon from '@material-ui/icons/Cached';
@@ -11,15 +11,17 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import Button from '@material-ui/core/Button'
-import {Link} from 'react-router-dom'
-import './Login.css'
-import {AuthContext} from './AuthContext'
+import {Link} from 'react-router-dom';
+import {AuthContext} from './AuthContext';
+import './Login.css';
+import CustomizedSnackbars from './Snakbar';
 import Cookies from 'js-cookie';
 
-function Login() {
+function Login(props) {
 
-const [isAuth,setAuth] = useState(false);
-
+const [isAuth,setAuth] = useContext(AuthContext);
+const [isLoggedin,setisLoggedIn] = useState(false);
+const [status,setStatus] = useState(0);
     useEffect(() => {
       setAuth(true)
     },[])
@@ -48,7 +50,7 @@ const [isAuth,setAuth] = useState(false);
         showPassword: false,
       });
         const classes = useStyles();
-  const postData = (e) =>{
+  const postData = async (e) =>{
 
       e.preventDefault();
       const data = {
@@ -66,43 +68,55 @@ const [isAuth,setAuth] = useState(false);
         }
         
       if(data.email!="" && data.password!=""){
-        
-        console.log(data);
-
-        // Hardik contributions Starts from here .
-
-        //TODO basically our work is to fetch this api data
-        //and in response headers there is access-token: token
-        //you have to take that token and put  that into Cokkie 
-        //through js-cookie [npm package]
-        
-        fetch('http://localhost:5000/api/signin',options).then(response => {
-          // console.log("MyToken ",response.json())
+        setisLoggedIn(true);
+        const req = await fetch('http://localhost:5000/api/signin',options);
+        setisLoggedIn(false);
+        if(req.ok){
+          const data = await req.json();
+          setStatus(200);
+          Cookies.set("Token", data.token);
+          Cookies.set("isAuth",isAuth);
+          window.open('/dashboard', "_self")
+        }
+        else{
           
-           return response.json();
-          }).then(data => {
-            console.log(data.msg)
-            Cookies.set("Token", data.token)
-            // console.log('isAuth ',!isAuth)
-            Cookies.set("isAuth",isAuth)
-            console.log("Cookie created !")
-          })
-        //Hardik contribution ends 
+        if(req.status===400){
+
+          setStatus(400);
+
+        }
+      }
+        
         
       }
       else{
         console.log({"_msg":"Data Body Empty !"});
       }
-      // const getToken = (req, res, next) => {
-        
-      // }
 
   }
   
   
-        return (
+        return (<React.Fragment>
+          <div class="status">
+          {
+
+            status==400 ? (<CustomizedSnackbars severity={"error"} content={"Invalid Password Or Email !"}/>) :(null)
+          }
+          {
+          status==200 ? (<CustomizedSnackbars severity={"success"} content={"Logged In Successfully "}/>) : (null)
+
+          }
+        </div>
+      <div>
+
+        {
+          
+
       <div className="login">
+        {   !isLoggedin ? (
+          
       <div className="login_container">
+       
     <CachedIcon/>
       <h2>Welcome To CIRCLE</h2>
       <form onSubmit={postData}>
@@ -149,8 +163,14 @@ const [isAuth,setAuth] = useState(false);
       </form>
           <p>Don't Have an Accounr?
       <Link to="/signup" className="link">Sign Up</Link></p>
-          </div>
+          </div> ) : (<h1>Loading,,,</h1>)
+}
   </div>
+}
+  </div>
+
+   </React.Fragment>
+   
     );
 }
 

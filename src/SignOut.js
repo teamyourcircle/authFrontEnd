@@ -7,15 +7,22 @@ import {Avatar} from '@material-ui/core'
 import './SignOut.css'
 import {AuthContext} from './AuthContext'
 import Cookie from 'js-cookie';
+import Skeleton from '@material-ui/lab/Skeleton';
+
 
 
 function SignOut() {
 
 //this is the token comming from the header .
 const [is_Auth,setAuth,token,setToken] = useContext(AuthContext);
-
+const [is_loaded,setIsLoaded] = useState(false);
 const [email,setEmail] = useState('');
 //console.log('token is:',token);
+
+const logout = () =>{
+  window.open("/login","_self")
+}
+
 const options = {
   method: 'GET',
   headers:{
@@ -33,7 +40,7 @@ Cookie.remove('Token');
 
 //status 
 console.log("is Authenticated "+is_Auth); 
-fetch('http://localhost:5000/api/logout',options).then(response => response.json()).then(data => setEmail(data.email))
+fetch('http://localhost:5000/api/logout',options).then(response => response.json()).then(data => {setEmail(data.email);setIsLoaded(true);})
 } , [is_Auth]);
     const useStyles = makeStyles((theme) => ({
     
@@ -57,7 +64,9 @@ fetch('http://localhost:5000/api/logout',options).then(response => response.json
 <CheckCircleRoundedIcon/>
 <div className="id">
 <Avatar />
-    <p>{email}</p>
+    {
+      !is_loaded ? (<Skeleton variant="text" width={400} height={40}/>) :(<div><p>{email}</p></div>)
+    }
 </div>
         </div>
         <Button 
@@ -66,6 +75,7 @@ fetch('http://localhost:5000/api/logout',options).then(response => response.json
       className={classes.button}
       size="large"
       color="secondary"
+      onClick={logout}
      >Sign In</Button>
           </div>
   </div>

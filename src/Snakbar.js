@@ -16,25 +16,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomizedSnackbars() {
+export default function CustomizedSnackbars({content, severity}) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
 
   return (
     <div className={classes.root}>
-      <Alert severity="info">This is an error message!</Alert>
+      <Alert severity={severity}>{content}</Alert>
     </div>
   );
 }

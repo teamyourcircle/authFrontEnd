@@ -1,14 +1,11 @@
 import React from 'react';
 import './Header.css';
-import CachedIcon from '@material-ui/icons/Cached';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import Popover from '@material-ui/core/Popover';
-import Typography from '@material-ui/core/Typography';
+import {Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 function Header() {
   const StyledBadge = withStyles((theme) => ({
@@ -48,7 +45,7 @@ function Header() {
                               </div>
 <div className="header_button"> 
 
-<Avatar style={{marginRight:'10px'}}/>
+
 <Popover
         id={id}
         open={open}
@@ -63,10 +60,12 @@ function Header() {
           horizontal: 'center',
         }}
       >
-        <Typography className={classes.typography}>The content of the Popover.</Typography>
+    <Button variant="contained" >
+    <Link to="/signout" activeClassName="active">Log Out</Link>
+    </Button>
       </Popover>
-      <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
-        Open Popover
+      <Button onClick={handleClick}>
+      <Avatar style={{marginRight:'10px'}}/>
       </Button>
 
 </div>

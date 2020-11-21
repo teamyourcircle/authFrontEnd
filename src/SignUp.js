@@ -13,7 +13,13 @@ import clsx from 'clsx';
 import Button from '@material-ui/core/Button'
 import {Link} from 'react-router-dom'
 import './SignUp.css'
+import CustomizedSnackbars from './Snakbar';
+
 function SignUp() {
+    const [isSignedUp,setIsSignedUp] = useState(false);
+    const [ispassnotmatch,setispass] = useState(false);
+    const [issixchar,setissixchar] = useState(true);
+    const [status,setStatus] = useState(0);
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
       };
@@ -54,39 +60,62 @@ if(p1==p2){
 return false;
 }       
 
-const postData = (e) =>{
+const postData = async (e) =>{
 e.preventDefault();
 const is_same = compare(values.password,values.repeat_password);
 if(is_same && values.email!="" && values.password!="" && values.repeat_password!=""){
+  if(values.password.length >=6){
+    const body = {
+      "email": values.email ,
+      "password": values.password
+    }  
+    
+    setIsSignedUp(true);
+    const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type':  'application/json'
+    },
+    body: JSON.stringify(body)
+    
+    }
+    
+    const res = await fetch('http://localhost:5000/api/signup',options);
+    setIsSignedUp(false);
+    if(res.ok){
+    const data  = await res.json();
+
+    setStatus(200);
+    window.open("/login","_self");
+    
+    }
+    else{
+        setStatus(res.status);
+    }
+  }
+  else{
+    setissixchar(false);
+  }
  
-const data = {
-  "email": values.email ,
-  "password": values.password
-}  
-console.log(data);
-const options = {
-method: 'POST',
-headers: {
-  'Content-Type':  'application/json'
-},
-body: JSON.stringify(data)
 
-}
-
-fetch('http://localhost:5000/api/signup',options).then(response => response.json()).then(data => console.log(data));
 
 }
 else{
-  console.log('Password not Match or empty Data !')
+setispass(true);
 }
 
 
 }
         const classes = useStyles();
     return (
+      <React.Fragment>
+      {ispassnotmatch ? (<CustomizedSnackbars severity={"error"} content={"Password Not Matched "}/>) : (null)} 
+      {!issixchar ? (<CustomizedSnackbars severity={"error"} content={"Password Should be of Atleast Six Characters "}/>) : (null)} 
+      {status==200 ?  (<CustomizedSnackbars severity={"success"} content={"Successfully Signed in  "}/>) : (null)}
+      {status==409 ?  (<CustomizedSnackbars severity={"error"} content={"Email Already Exists "}/>) : (null)}
       <div className="login">
-        
-      <div className="login_container">
+        { !isSignedUp ? 
+      (<div className="login_container">
     <CachedIcon/>
       <h2>Welcome To CIRCLE</h2>
       <form onSubmit={postData}>
@@ -156,9 +185,10 @@ else{
       </form>
 <p>Already have an Account?
 <Link to="/login" className="link">Log In</Link></p>
-          </div>
-
+          </div>) : (<h1>Loading,,,</h1>)
+}
   </div>
+  </React.Fragment>
 );
 }
 
