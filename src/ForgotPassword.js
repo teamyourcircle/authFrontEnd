@@ -5,10 +5,14 @@ import CachedIcon from '@material-ui/icons/Cached';
 import Button from '@material-ui/core/Button'
 import './Login.css'
 import './ForgotPassword.css'
+import CustomizedSnackbars from './Snakbar';
+
 function ForgotPassword() {
   const [isVerfied,setIsVerified] = useState(false);
   const [email,setEmail] = useState('');
-    const useStyles = makeStyles((theme) => ({
+  const [emailExists,isemailExists] = useState(true);
+  const [issent,setisSent] = useState(false);  
+  const useStyles = makeStyles((theme) => ({
         margin: {
           margin: theme.spacing(1),
         },
@@ -19,7 +23,7 @@ function ForgotPassword() {
       }
 
       const handleSubmit = async ()  =>{
-        console.log(email);
+        
         setIsVerified(true);
         const options = {
           method: 'POST',
@@ -30,16 +34,17 @@ function ForgotPassword() {
           
           }
         const response = await fetch(`http://localhost:5000/api/forgot_password`,options);
-        const finalResponse = await response;
-        if(!finalResponse.ok){
+        if(!response.ok){
           setTimeout(function (){
             setIsVerified(false)
           },1000);
+          isemailExists(false);          
         }
         else {
-          const data = await finalResponse.json();
+          const data = await response.json();
           //setIsVerified(false);
           console.log(data);
+          setisSent(true);
           if(data['status']){
             setIsVerified(false);
           }
@@ -50,7 +55,8 @@ function ForgotPassword() {
         const classes = useStyles();
     return (
       <div className="login">
-
+        {issent ? (<CustomizedSnackbars severity={"success"} content={"Check Your Mail."} />) : (null)}
+        {!emailExists  ? (<CustomizedSnackbars severity={"error"} content={"Email Not Exists ."} />) : (null)}
         { 
       !isVerfied ? 
       (

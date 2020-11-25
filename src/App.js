@@ -16,7 +16,7 @@ function App() {
    <Router>
       <Switch>
       <Route path="/forgot"><ForgotPassword/></Route>
-         <Route path="/verify_password/:token"  children={<Verify />}/>
+         <Route path="/verify/:token"  children={<Verify />}/>
          <Route path="/signup"><SignUp /></Route>
        <AuthContextProvider>
        <Route path="/signout"><SignOut /></Route>
