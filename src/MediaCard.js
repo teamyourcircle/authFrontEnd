@@ -38,9 +38,7 @@ function MediaCard({name,img,description}) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="large" color="secondary" variant="contained" style={{width:'100%'}}>
-          Get Started
-        </Button>
+       
       </CardActions>
     </Card>
   );

@@ -98,13 +98,18 @@ const [isVerified,setisVerified] = useState(true);
         description="Media player service -  a video player help in manipulation of your video content by embedded any form in mentioned time stamps , 
         with time stamps based analysis on basis of views , with Sketch annotations on particular frame at mentioned time stamps"
         />
+         <Button size="large" color="secondary" variant="contained" style={{width:'100%'}}>
+          <a href="#">Get Started</a>
+        </Button>
               <MediaCard 
         img="https://i.ibb.co/1RGWZt4/Black-White-and-Triangle-Data-Chase-Games-Logo-1.png"
         name="Survey Forms"
         description="Form survey service - form survey service will help you in creating a 
         quick form with Rich field types and help you to create quality Decision with simple visualizing tool."
         />
-
+       <Button size="small" color="secondary" variant="contained" style={{width:'100%'}}>
+          <a href="http://localhost:8080/dashboard/form" target="_blank"> Get Started</a>
+        </Button>
       </div>
 
        
