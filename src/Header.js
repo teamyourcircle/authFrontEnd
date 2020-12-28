@@ -40,11 +40,12 @@ function Header() {
     <nav className="header">
       <div className="header_brand">
       <img src="https://i.ibb.co/1Jx9SJV/White-and-Purple-Icon-Internet-Logo-2-removebg-preview.png" style={{height:'200px'}}/>
-                <h1>CIRCLE</h1>
-
-                              </div>
+        <h1>CIRCLE</h1>
+      </div>
+      <div>
+        <a href="/developers">Api</a>
+      </div>
 <div className="header_button"> 
-
 
 <Popover
         id={id}
