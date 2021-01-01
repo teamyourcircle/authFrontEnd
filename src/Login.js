@@ -97,6 +97,9 @@ const [status,setStatus] = useState(0);
   
   
         return (<React.Fragment>
+          <div className="back">
+            
+          </div>
           <div class="status">
           {
 
@@ -111,10 +114,10 @@ const [status,setStatus] = useState(0);
 
         {
           
-
       <div className="login">
         {   !isLoggedin ? (
-          
+        
+      
       <div className="login_container">
        
     <CachedIcon/>
@@ -161,15 +164,14 @@ const [status,setStatus] = useState(0);
       type="submit"
       value="submit">Login</Button>
       </form>
-          <p>Don't Have an Accounr?
+          <p>Don't Have an Account?
       <Link to="/signup" className="link">Sign Up</Link></p>
           </div> ) : (<h1>Loading,,,</h1>)
 }
   </div>
 }
   </div>
-
-   </React.Fragment>
+  </React.Fragment>
    
     );
 }

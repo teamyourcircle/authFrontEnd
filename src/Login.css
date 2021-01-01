@@ -1,11 +1,14 @@
 .login{
     height:100vh;
-    background-color: #f8f8f8;
-    display: grid;
+        display: grid;
     place-items: center;
 }
+.back{
+    background-color: #f50057;
+    height: 27vh;
+}
 .login_container > h2{
-    font-weight:208;
+    font-weight:700;
 }
 .login_container > button{
     margin-top:50px;
@@ -13,6 +16,14 @@
     width: 100%;
     color: white;
 
+}
+.MuiButton-containedSecondary {
+    color: #fff;
+    background-color: #f50057;
+    width: 100% !important;
+    margin-top: 20px !important;
+    margin-left: 10px !important;
+    height: 44px !important;
 }
 .forgot{
     float: right;
@@ -29,6 +40,9 @@ font-weight: bold;
     background-color:rgb(255, 255, 255);
     border-radius: 10px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),0 1px 2px rgba(0, 0, 0, 0.24);
+    position: relative;
+    top: -320px;
+border-radius: 10px;
 
 }
 .login_container > .MuiSvgIcon-root{

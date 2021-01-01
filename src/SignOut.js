@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import CachedIcon from '@material-ui/icons/Cached';
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import {Avatar} from '@material-ui/core'
-import './SignOut.css'
 import {AuthContext} from './AuthContext'
 import Cookie from 'js-cookie';
 import Skeleton from '@material-ui/lab/Skeleton';

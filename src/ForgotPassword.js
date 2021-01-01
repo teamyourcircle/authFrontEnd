@@ -54,14 +54,14 @@ function ForgotPassword() {
 
         const classes = useStyles();
     return (
-      <div className="login">
+      <div className="forgot">
         {issent ? (<CustomizedSnackbars severity={"success"} content={"Check Your Mail."} />) : (null)}
         {!emailExists  ? (<CustomizedSnackbars severity={"error"} content={"Email Not Exists ."} />) : (null)}
         { 
       !isVerfied ? 
       (
 
-      <div className="login_container">
+      <div className="forgot_container">
     <CachedIcon/>
       <h2>Reset Your Password</h2>
       <p style={{fontWeight:'600'}}>Enter your Registered email 

@@ -113,9 +113,9 @@ setispass(true);
       {!issixchar ? (<CustomizedSnackbars severity={"error"} content={"Password Should be of Atleast Six Characters "}/>) : (null)} 
       {status==200 ?  (<CustomizedSnackbars severity={"success"} content={"Successfully Signed in  "}/>) : (null)}
       {status==409 ?  (<CustomizedSnackbars severity={"error"} content={"Email Already Exists "}/>) : (null)}
-      <div className="login">
+      <div className="signup">
         { !isSignedUp ? 
-      (<div className="login_container">
+      (<div className="signup_container">
     <CachedIcon/>
       <h2>Welcome To CIRCLE</h2>
       <form onSubmit={postData}>
