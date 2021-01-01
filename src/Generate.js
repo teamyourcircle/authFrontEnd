@@ -5,39 +5,32 @@ import Button from '@material-ui/core/Button';
 import { AuthContext} from './AuthContext'
 
 function Generate() {
+    
     const [apiname, setapiname] = React.useState();
     const [scopes,setScopes] = React.useState([]);
-    const url = 'http://localhost:5000/api/users/dashboard'
- 
-
     const [is_Auth,setAuth,token,setToken] = useContext(AuthContext);
-    const [isLoaded,setisLoaded] = useState(false);  
-    const options = {
-      method: 'GET',
-      headers:{
-        'access-token':token,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    };
-    const [email,setEmail] = useState('');
-    const [isVerified,setisVerified] = useState(true);
-      useEffect(() =>{
-      fetch(url, options).then(response => response.json()).then(data => {
-        setEmail(data.email);
-        setisVerified(data.isverified);
-        setisLoaded(true);
-        console.log(data);
-      })
-    
-      }, [is_Auth])
+    const [isLoaded,setisLoaded] = useState(true);  
+    const [key, setkey] = useState("")
     const handleSubmit = () =>{
-        const body = {
-            "name": apiname,
-            "scopes": scopes,
-            "mail": email
+      const body = {
+        "name": apiname,
+        "scopes": scopes
+      }
+      const options = {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers:{
+          'access-token':token,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         }
-        console.log(body);
+      };
+      console.log(body);
+      const url = "http://localhost:5000/api/token/generator";
+      fetch(url, options).then(response => response.json()).then(data => {
+        setkey(data['hashed-token']);
+        setisLoaded(false);
+      })
     }
 
     const handleScopes = (e) =>{
@@ -81,7 +74,7 @@ function Generate() {
               <div className="group">
               <Button className="button" onClick={handleSubmit}>Create New Api Key</Button>
               </div>
-            </React.Fragment>): (null)}     
+            </React.Fragment>): (<div>Store Your Api Key {key} For Further Uses </div>)}     
         </div>
     );
 }
