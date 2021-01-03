@@ -1,0 +1,38 @@
+.App_token {
+    font-family: sans-serif;
+  }
+  
+  .key_api {
+    background: white;
+    border: none;
+    border-radius: 6px;
+    padding-bottom: 20px;
+  }
+  .key_header > h1 {
+    font-size: 22px;
+    padding: 10px;
+    color: #868484;
+  }
+  hr {
+    color: whitesmoke;
+    border: 1px solid whitesmoke;
+  }
+  .key_content {
+    padding: 10px;
+  }
+  .key_content > p {
+    background: #eeeeee;
+    padding: 10px;
+  }
+  .key_content > span {
+    color: #868484;
+  }
+  
+  .key_content > .mid_high {
+    color: #3e3a3a;
+  }
+  .key_content > .high {
+    color: #3e3a3a;
+    font-weight: 900;
+  }
+  

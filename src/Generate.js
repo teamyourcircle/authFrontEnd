@@ -3,7 +3,7 @@ import './Generate.css';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import { AuthContext} from './AuthContext'
-
+import Temporary from './Temporary'
 function Generate() {
     
     const [apiname, setapiname] = React.useState();
@@ -74,7 +74,7 @@ function Generate() {
               <div className="group">
               <Button className="button" onClick={handleSubmit}>Create New Api Key</Button>
               </div>
-            </React.Fragment>): (<div>Store Your Api Key {key} For Further Uses </div>)}     
+            </React.Fragment>): (<Temporary api_key={key}/>)}     
         </div>
     );
 }

@@ -44,7 +44,9 @@ function Header() {
       </div>
       <div>
         <a href="/developers">Api</a>
+        
       </div>
+      <a href="http://localhost:5000/developer/api-docs">Api Docs</a>
 <div className="header_button"> 
 
 <Popover
