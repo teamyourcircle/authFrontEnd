@@ -36,12 +36,12 @@ const [isVerified,setisVerified] = useState(true);
   //create token 
   const sendLink = async () =>{
     const options = {
-      method: 'POST',
+      method: 'GET',
       headers: {
-        'Content-Type':  'application/json'
+        'access-token':token,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
-      body: JSON.stringify({"email":email})
-      
       }
     const res = await fetch("http://localhost:5000/api/create/token", options);
     const data = await res.json();
