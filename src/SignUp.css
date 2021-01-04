@@ -1,30 +1,47 @@
 .signup{
-    height:100vh;
-    background-color: #f8f8f8;
+   padding: 12px;
     display: grid;
     place-items: center;
 }
+.mobile_look{
+    background-color: #f2f2f2;
+    border-radius: 90px;
+    width: 62px;
+    height:10px;
+    justify-content: center;
+    position: relative;
+    top: 30px;
+}
+.mobile{
+    display: grid;
+    place-items: center;
+    position: relative;
+    bottom: 70px;
+}
 .signup_container > h2{
     font-weight:700;
+    font-size:28px;
+    color: #525252;
 }
 .signup_container > button{
     margin-top:50px;
     text-transform: inherit !important;
     width: 100%;
     color: white;
-
+font-weight: bold !important;
 }
 .link{
     text-decoration: none;
 font-weight: bold;
 }
 .signup_container{
-    padding:80px;
+    padding:50px;
     text-align: center;
     background-color:rgb(255, 255, 255);
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),0 1px 2px rgba(0, 0, 0, 0.24);
-
+    position: relative;
+    top:-62px;
 }
 .signup_container > .MuiSvgIcon-root{
     font-size:60px;
@@ -51,4 +68,15 @@ animation: image 6s infinite;
         transform: rotate(360deg);
        color: red;
     }
+}
+.back > img{
+    height: 160px;
+    padding: 30px;
+}
+.back{
+    background-color: #f50057;
+    height: 27vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

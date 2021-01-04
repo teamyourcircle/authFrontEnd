@@ -6,7 +6,9 @@ import Button from '@material-ui/core/Button'
 import './Login.css'
 import './ForgotPassword.css'
 import CustomizedSnackbars from './Snakbar';
-
+import forgotGirl from './images/forgotGirl.svg';
+import forgot from './images/forgot.svg'
+import Hidden from '@material-ui/core/Hidden';
 function ForgotPassword() {
   const [isVerfied,setIsVerified] = useState(false);
   const [email,setEmail] = useState('');
@@ -54,7 +56,15 @@ function ForgotPassword() {
 
         const classes = useStyles();
     return (
+<React.Fragment>
+<div className="back">
+      <Hidden  only={['sm', 'xs','md']}>
+      <img src={forgotGirl}/>
+        <img src={forgot}/>
+    </Hidden>
+      </div>
       <div className="forgot">
+       
         {issent ? (<CustomizedSnackbars severity={"success"} content={"Check Your Mail."} />) : (null)}
         {!emailExists  ? (<CustomizedSnackbars severity={"error"} content={"Email Not Exists ."} />) : (null)}
         { 
@@ -62,9 +72,12 @@ function ForgotPassword() {
       (
 
       <div className="forgot_container">
+         <div className="mobile">
+        <div class="mobile_look"></div>
+        </div>
     <CachedIcon/>
       <h2>Reset Your Password</h2>
-      <p style={{fontWeight:'600'}}>Enter your Registered email 
+      <p style={{lineHeight:'27px',color:'grey'}}>Enter your Registered email 
           <br />address and we will send you a password reset link.</p>
       <TextField
       fullWidth
@@ -91,6 +104,7 @@ function ForgotPassword() {
       ) : (<h1>Loading,,,</h1>)
         }
   </div>
+</React.Fragment>
     );
 }
 

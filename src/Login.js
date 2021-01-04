@@ -16,7 +16,9 @@ import {AuthContext} from './AuthContext';
 import './Login.css';
 import CustomizedSnackbars from './Snakbar';
 import Cookies from 'js-cookie';
-
+import loginBoy from './images/loginBoy.svg';
+import loginGirl from './images/loginGirl.svg'
+import Hidden from '@material-ui/core/Hidden';
 function Login(props) {
 
 const [isAuth,setAuth] = useContext(AuthContext);
@@ -98,7 +100,10 @@ const [status,setStatus] = useState(0);
   
         return (<React.Fragment>
           <div className="back">
-            
+          <Hidden  only={['sm', 'xs','md']}>
+          <img src={loginBoy}/>
+            <img src={loginGirl}/>
+        </Hidden>
           </div>
           <div class="status">
           {
@@ -117,9 +122,11 @@ const [status,setStatus] = useState(0);
       <div className="login">
         {   !isLoggedin ? (
         
-      
       <div className="login_container">
-       
+        <div className="mobile">
+        <div class="mobile_look"></div>
+        </div>
+      
     <CachedIcon/>
       <h2>Welcome To CIRCLE</h2>
       <form onSubmit={postData}>
@@ -154,7 +161,7 @@ const [status,setStatus] = useState(0);
             labelWidth={70}
           />
         </FormControl>
-        <Link to="/forgot" className="forgot">Forgot Password ?</Link>
+        <Link to="/forgot" className="forgot_password">Forgot Password ?</Link>
       <Button 
       variant="contained"
       color="secondary"

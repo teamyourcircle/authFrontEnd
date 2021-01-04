@@ -14,7 +14,10 @@ import Button from '@material-ui/core/Button'
 import {Link} from 'react-router-dom'
 import './SignUp.css'
 import CustomizedSnackbars from './Snakbar';
-
+import signBoy from './images/signBoy.svg';
+import signMiddle from './images/signMiddle.svg';
+import signGirl from './images/signGirl.svg'
+import Hidden from '@material-ui/core/Hidden';
 function SignUp() {
     const [isSignedUp,setIsSignedUp] = useState(false);
     const [ispassnotmatch,setispass] = useState(false);
@@ -109,6 +112,13 @@ setispass(true);
         const classes = useStyles();
     return (
       <React.Fragment>
+          <div className="back">
+          <Hidden  only={['sm', 'xs','md']}>
+          <img src={signBoy}/>
+          <img src={signMiddle}/>
+            <img src={signGirl}/>
+        </Hidden>
+          </div>
       {ispassnotmatch ? (<CustomizedSnackbars severity={"error"} content={"Password Not Matched "}/>) : (null)} 
       {!issixchar ? (<CustomizedSnackbars severity={"error"} content={"Password Should be of Atleast Six Characters "}/>) : (null)} 
       {status==200 ?  (<CustomizedSnackbars severity={"success"} content={"Successfully Signed in  "}/>) : (null)}
@@ -116,6 +126,9 @@ setispass(true);
       <div className="signup">
         { !isSignedUp ? 
       (<div className="signup_container">
+           <div className="mobile">
+        <div class="mobile_look"></div>
+        </div>
     <CachedIcon/>
       <h2>Welcome To CIRCLE</h2>
       <form onSubmit={postData}>

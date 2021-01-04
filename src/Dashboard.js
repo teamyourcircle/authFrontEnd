@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AuthContext} from './AuthContext'
 import Button from '@material-ui/core/Button';
 import CustomizedSnackbars from './Snakbar';
-
+import Avatar from '@material-ui/core/Avatar';
 
 function Dashboard() {
 
@@ -73,7 +73,26 @@ const [isVerified,setisVerified] = useState(true);
         <div className="dashboard">
           <div className="dashboard_info">
     {
-    isLoaded ? (<p>{email}</p>): (<Skeleton variant="text" width={400} height={40}/>)
+    isLoaded ? ( 
+      <React.Fragment>
+        <div className="first">
+        <Avatar style={{background:'#f50057',padding:'5px'}}>AK</Avatar>
+      <p>{email}</p>
+        </div>
+        <div className="show_sidebar">
+            <div className="show_option">
+            <img src="https://www.flaticon.com/svg/static/icons/svg/103/103093.svg"/>
+            <h3>API</h3>
+                </div>
+                <div className="show_option">
+                <img src="https://www.flaticon.com/svg/static/icons/svg/2910/2910834.svg"/>
+                <h3>API DOCS</h3>
+                </div>
+        
+        </div>
+ 
+      </React.Fragment>
+      ): (<Skeleton variant="text" width={400} height={40}/>)
     }
     </div>
   </div>

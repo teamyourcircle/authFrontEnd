@@ -66,6 +66,8 @@ function Header() {
     <Button variant="contained" >
     <Link to="/signout" activeClassName="active">Log Out</Link>
     </Button>
+
+    
       </Popover>
       <Button onClick={handleClick}>
       <Avatar style={{marginRight:'10px'}}/>

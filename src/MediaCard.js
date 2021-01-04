@@ -38,7 +38,9 @@ function MediaCard({name,img,description}) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-       
+      <Button size="small" color="secondary" variant="contained" style={{width:'21%'}}>
+          <a href="http://localhost:8080/dashboard/form" target="_blank"> Get Started</a>
+        </Button>
       </CardActions>
     </Card>
   );
