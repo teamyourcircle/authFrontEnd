@@ -73,7 +73,6 @@ export default function BasicTable() {
     };
     const url = "http://localhost:5000/api/token/put/apis";
     fetch(url, optionsEdit).then( res => res.json()).then( data => {
-      console.log(data) 
       setHashed(data["hashed_token"]);
       setIsEdit(true);
     });
