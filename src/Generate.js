@@ -4,13 +4,13 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import { AuthContext} from './AuthContext'
 import Temporary from './Temporary'
-function Generate() {
+function Generate({ loaded, keys }) {
     
     const [apiname, setapiname] = React.useState();
     const [scopes,setScopes] = React.useState([]);
     const [is_Auth,setAuth,token,setToken] = useContext(AuthContext);
-    const [isLoaded,setisLoaded] = useState(true);  
-    const [key, setkey] = useState("")
+    const [isLoaded,setisLoaded] = useState( loaded );  
+    const [key, setkey] = useState(keys);
     const handleSubmit = () =>{
       const body = {
         "name": apiname,
