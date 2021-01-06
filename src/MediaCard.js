@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
+import './MediaCard.css'
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -39,7 +39,7 @@ function MediaCard({name,img,description}) {
       </CardActionArea>
       <CardActions>
       <Button size="small" color="secondary" variant="contained" style={{width:'21%'}}>
-          <a href="http://localhost:8080/dashboard/form" target="_blank"> Get Started</a>
+          <a href="http://localhost:8080/dashboard/form" target="_blank" className="a"> Get Started</a>
         </Button>
       </CardActions>
     </Card>

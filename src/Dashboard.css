@@ -4,20 +4,22 @@
     padding: 10px;
     cursor: pointer;
     margin: 10px;
-    width: 20%;
+    width: 19%;
     border-radius: 20px;
     transition-property: background-color;
     transition-duration: 0.5s;
     transition-timing-function: ease-in-out;
+    
 }
 .first > p{
     position: relative;
     left: 10px;
 font-weight: bold;
-font-variant: uppercase;
+text-transform: uppercase;
 }
 .first:hover{
     background-color: #eeeeee;
+
 }
 .show_products{
     display: grid;
@@ -37,19 +39,26 @@ font-variant: uppercase;
     position: relative;
     top: -20px;
     left: 10px;
+    margin-bottom: 10px;
 }
 .show_option:hover{
     background-color: #eeeeee;
 }
 .show_option > img{
-    height: 30px;
+    height: 40px;
 }
-.show_option > h3{
-    font-weight: bold;
-    font-size:20px;
+.show_option > .api{
+    font-size:18px;
     position: relative;
     left: 10px;
-
+color: #777777;
+font-weight: 400 !important;
+}
+.show_option > .api_docs{
+    font-size:18px;
+    position: relative;
+    left: 10px;
+color: #777777;
 }
 .show_sidebar{
     padding: 10px;

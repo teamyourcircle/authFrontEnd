@@ -82,11 +82,11 @@ const [isVerified,setisVerified] = useState(true);
         <div className="show_sidebar">
             <div className="show_option">
             <img src="https://www.flaticon.com/svg/static/icons/svg/103/103093.svg"/>
-            <h3>API</h3>
+            <a href="/developers" className="api"><h3>Api</h3></a>
                 </div>
                 <div className="show_option">
                 <img src="https://www.flaticon.com/svg/static/icons/svg/2910/2910834.svg"/>
-                <h3>API DOCS</h3>
+                <a href="http://localhost:5000/developer/api-docs" className="api_docs"><h3>Api Docs</h3></a>
                 </div>
         
         </div>

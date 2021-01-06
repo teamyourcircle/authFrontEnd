@@ -42,11 +42,7 @@ function Header() {
       <img src="https://i.ibb.co/1Jx9SJV/White-and-Purple-Icon-Internet-Logo-2-removebg-preview.png" style={{height:'200px'}}/>
         <h1>CIRCLE</h1>
       </div>
-      <div>
-        <a href="/developers">Api</a>
-        
-      </div>
-      <a href="http://localhost:5000/developer/api-docs">Api Docs</a>
+
 <div className="header_button"> 
 
 <Popover
