@@ -8,12 +8,14 @@ import CustomizedSnackbars from './Snakbar';
 import Avatar from '@material-ui/core/Avatar';
 
 function Dashboard() {
+  
 
   const url = 'http://localhost:5000/api/users/dashboard'
  
 
 const [is_Auth,setAuth,token,setToken] = useContext(AuthContext);
 const [isLoaded,setisLoaded] = useState(false);  
+
 const options = {
   method: 'GET',
   headers:{
