@@ -18,6 +18,8 @@ import signBoy from './images/signBoy.svg';
 import signMiddle from './images/signMiddle.svg';
 import signGirl from './images/signGirl.svg'
 import Hidden from '@material-ui/core/Hidden';
+import Login from './Google_Login.js'
+import { AuthContextProvider } from './AuthContext';
 function SignUp() {
     const [isSignedUp,setIsSignedUp] = useState(false);
     const [ispassnotmatch,setispass] = useState(false);
@@ -195,6 +197,10 @@ setispass(true);
       value="submit"
       type="submit"
       >Sign Up</Button>
+      <AuthContextProvider>
+       <Login 
+       />
+      </AuthContextProvider>
       </form>
 <p>Already have an Account?
 <Link to="/login" className="link">Log In</Link></p>
