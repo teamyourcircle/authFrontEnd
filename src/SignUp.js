@@ -204,7 +204,7 @@ setispass(true);
       </form>
 <p>Already have an Account?
 <Link to="/login" className="link">Log In</Link></p>
-          </div>) : (<h1>Loading,,,</h1>)
+</div>) : (<h1>Loading,,,</h1>)
 }
   </div>
   </React.Fragment>
