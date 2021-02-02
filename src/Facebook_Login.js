@@ -3,9 +3,6 @@ import Cookies from 'js-cookie';
 import {AuthContext} from './AuthContext';
 import FacebookLogin from 'react-facebook-login';
 
-
-const clientId ='391383527608-vq5pjfpslfeq4i10624rvt088eqhsa4p.apps.googleusercontent.com';
-
 function LoginFacebook() {
   const [isAuth,setAuth] = useContext(AuthContext);
   const responseFacebook= (res)=>{
@@ -38,7 +35,7 @@ function LoginFacebook() {
   return (
     <div>
        <FacebookLogin
-        appId="839799953534082"
+        appId="236175084713564"
         autoLoad={false}
         callback={responseFacebook}
          />
