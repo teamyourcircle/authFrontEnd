@@ -1,22 +1,22 @@
 import React,{useContext,useState} from 'react';
 import Cookies from 'js-cookie';
-import { GoogleLogin } from 'react-google-login';
 import {AuthContext} from './AuthContext';
+import FacebookLogin from 'react-facebook-login';
+
 
 const clientId ='391383527608-vq5pjfpslfeq4i10624rvt088eqhsa4p.apps.googleusercontent.com';
 
-function LoginGoogle() {
-
-
+function LoginFacebook() {
   const [isAuth,setAuth] = useContext(AuthContext);
-  const onSuccess = (res) => {
-  let token_Id = res.tokenId;
+  const responseFacebook= (res)=>{
+    console.log(res.accessToken)
+    let token_Id = res.accessToken;
   fetch('http://localhost:5000/auth/api/socialLogin', {
     method: 'POST',
     headers: {'Content-Type':'application/json'},
     body:JSON.stringify({
         "access_token":`${token_Id}`,
-        "social_type":"google"
+        "social_type":"facebook"
     })
             
     }).then(function(res) {
@@ -33,24 +33,17 @@ function LoginGoogle() {
     }).catch(function(error) {
       console.log(error);
     });
-    }
-  const onFailure = (res) => {
-    console.log('Login failed: res:', res);
-  };
+  }
 
   return (
     <div>
-      <GoogleLogin
-        clientId={clientId}
-        buttonText="Login"
-        onSuccess={onSuccess}
-        onFailure={onFailure}
-        cookiePolicy={'single_host_origin'}
-        style={{ marginTop: '100px' }}
-        
-      />
+       <FacebookLogin
+        appId="839799953534082"
+        autoLoad={false}
+        callback={responseFacebook}
+         />
     </div>
   );
 }
 
-export default LoginGoogle;
+export default LoginFacebook;

@@ -20,7 +20,8 @@ import loginBoy from './images/loginBoy.svg';
 import loginGirl from './images/loginGirl.svg'
 import Hidden from '@material-ui/core/Hidden';
 import { AuthContextProvider } from './AuthContext';
-import GoogleLogin from './Google_Login.js'
+import LoginGoogle from './Google_Login.js'
+import LoginFacebook from './Facebook_Login.js'
 
 function Login(props) {
 
@@ -174,7 +175,8 @@ const [status,setStatus] = useState(0);
       type="submit"
       value="submit">Login</Button>
       <AuthContextProvider>
-      <GoogleLogin />
+      <LoginGoogle />
+      <LoginFacebook/>
       </AuthContextProvider>
       </form>
           <p>Don't Have an Account?
