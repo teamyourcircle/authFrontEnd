@@ -18,15 +18,14 @@ import signBoy from './images/signBoy.svg';
 import signMiddle from './images/signMiddle.svg';
 import signGirl from './images/signGirl.svg'
 import Hidden from '@material-ui/core/Hidden';
-import Login from './Google_Login.js'
+import LoginGoogle from './Google_Login.js'
+import LoginFacebook from './Facebook_Login.js'
 import { AuthContextProvider } from './AuthContext';
 function SignUp() {
     const [isSignedUp,setIsSignedUp] = useState(false);
     const [ispassnotmatch,setispass] = useState(false);
     const [issixchar,setissixchar] = useState(true);
     const [status,setStatus] = useState(0);
-    const [isError,setError] = useState(false)
-    // const [socialErr,setSocial] = useState("Mohsin")
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
       };
@@ -200,9 +199,8 @@ setispass(true);
       type="submit"
       >Sign Up</Button>
       <AuthContextProvider>
-       <Login 
-
-       />
+       <LoginGoogle/>
+       <LoginFacebook/>
       </AuthContextProvider>
       </form>
 <p>Already have an Account?
