@@ -25,6 +25,8 @@ function SignUp() {
     const [ispassnotmatch,setispass] = useState(false);
     const [issixchar,setissixchar] = useState(true);
     const [status,setStatus] = useState(0);
+    const [isError,setError] = useState(false)
+    // const [socialErr,setSocial] = useState("Mohsin")
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
       };
@@ -199,6 +201,7 @@ setispass(true);
       >Sign Up</Button>
       <AuthContextProvider>
        <Login 
+
        />
       </AuthContextProvider>
       </form>
