@@ -12,7 +12,7 @@ import { AuthContextProvider } from './AuthContext';
 import ProtectedRoute from './ProtectedRoute';
 import Products from './Products'
 import Generate from './Generate'
-
+import Integration from './Integration';
 function App() {
    return (
 <div className="app">
@@ -27,7 +27,7 @@ function App() {
        <ProtectedRoute path="/dashboard" component={() => <React.Fragment><div className="layout"><Dashboard /><Products /></div></React.Fragment>} />
        <ProtectedRoute path="/create/token" component={() => <Generate loaded = {true} keys=""/>} />
        <ProtectedRoute path="/developers" component={Developers} />
-       
+       <ProtectedRoute path="/integration" component={Integration} />
        </AuthContextProvider>
       </Switch>
    </Router>
