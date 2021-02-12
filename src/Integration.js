@@ -4,7 +4,6 @@ import {config} from '@teamyourcircle/oauth-integration'
 import { AuthContext} from './AuthContext'
 function Integration () {
 const [is_Auth,setAuth,token,setToken] = useContext(AuthContext);
-const [flagArr,setflagArr]  = useState([]);
 const [integrationId, setintegrationId] = useState([])
 
 
@@ -36,11 +35,7 @@ useEffect(() => {
 }, [])
 
 useEffect(() => {
-  let localflags = [];
-  config.forEach(element => {
-    localflags.push(checkIsInstalled(integrationId,element.id));
-  });
-  setflagArr(localflags);
+  console.log(integrationId);
 }, [integrationId])
 
 const checkIsInstalled = (array,id) =>{
@@ -50,11 +45,20 @@ const checkIsInstalled = (array,id) =>{
   return false;
 }
 
+const handleSuccess = (res) =>{
+  console.log(res);
+  if(res.integration_id){
+    setintegrationId([...integrationId, res.integration_id]);
+  }
+}
+const handleFaliure = (res) =>{
+  console.log(res);
+}
 
 
 return (
     <div>      
-    {config.map((object, i) => <IntegrationDisplay id={object.id} key={flagArr} isInstalled = {checkIsInstalled(integrationId,object.id)} accessToken = {token} />)} 
+    {config.map((object, i) => <IntegrationDisplay handleSuccess={handleSuccess} handleFaliure={handleFaliure} id={object.id} key={integrationId} isInstalled = {checkIsInstalled(integrationId,object.id)} accessToken = {token} />)} 
     </div>
 );
 }
