@@ -8,11 +8,8 @@ import CustomizedSnackbars from './Snakbar';
 import Avatar from '@material-ui/core/Avatar';
 
 function Dashboard() {
-  
 
-  const url = 'http://localhost:5000/api/users/dashboard'
- 
-
+const url = 'http://localhost:5000/api/users/dashboard'
 const [is_Auth,setAuth,token,setToken] = useContext(AuthContext);
 const [isLoaded,setisLoaded] = useState(false);  
 
@@ -99,6 +96,7 @@ const [isVerified,setisVerified] = useState(true);
     </div>
   </div>
      
+  <a href="/integration">integration</a>
 
 </div>
 </React.Fragment>

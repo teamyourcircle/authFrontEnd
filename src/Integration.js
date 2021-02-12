@@ -4,7 +4,7 @@ import {config} from '@teamyourcircle/oauth-integration'
 import { AuthContext} from './AuthContext'
 function Integration () {
 const [is_Auth,setAuth,token,setToken] = useContext(AuthContext);
-
+const [flagArr,setflagArr]  = useState([]);
 const [integrationId, setintegrationId] = useState([])
 
 
@@ -13,9 +13,9 @@ useEffect(() => {
   fetch('http://localhost:5000/auth/api/user/oauthApps', {
   method: 'GET',
   headers: {
-         'access-token':token,
-         'Content-Type': 'application/json',
-         'Accept': 'application/json'
+    'access-token':token,
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
      },
  
           
@@ -35,18 +35,26 @@ useEffect(() => {
   
 }, [])
 
-  const checkIsInstalled = (array,id) =>{
-   if(!array.includes(id)){
-   return true
-   }
-   return false;
+useEffect(() => {
+  let localflags = [];
+  config.forEach(element => {
+    localflags.push(checkIsInstalled(integrationId,element.id));
+  });
+  setflagArr(localflags);
+}, [integrationId])
+
+const checkIsInstalled = (array,id) =>{
+  if(array.includes(id)){
+  return true
   }
+  return false;
+}
 
 
 
 return (
     <div>      
-    {config.map((object, i) => <IntegrationDisplay id={object.id} key={i} isInstalled = {checkIsInstalled(integrationId,object.id)} accessToken = {token} />)} 
+    {config.map((object, i) => <IntegrationDisplay id={object.id} key={flagArr} isInstalled = {checkIsInstalled(integrationId,object.id)} accessToken = {token} />)} 
     </div>
 );
 }
