@@ -174,10 +174,12 @@ const [status,setStatus] = useState(0);
       color="secondary"
       type="submit"
       value="submit">Login</Button>
-      <AuthContextProvider>
+    <div className="more">
+    <AuthContextProvider>
       <LoginGoogle />
       <LoginFacebook/>
       </AuthContextProvider>
+    </div>
       </form>
           <p>Don't Have an Account?
       <Link to="/signup" className="link">Sign Up</Link></p>

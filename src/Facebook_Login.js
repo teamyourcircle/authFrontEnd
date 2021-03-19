@@ -2,7 +2,8 @@ import React,{useContext,useState} from 'react';
 import Cookies from 'js-cookie';
 import {AuthContext} from './AuthContext';
 import FacebookLogin from 'react-facebook-login';
-
+import FacebookIcon from '@material-ui/icons/Facebook';
+import './Facebook.css'
 function LoginFacebook() {
   const [isAuth,setAuth] = useContext(AuthContext);
   const responseFacebook= (res)=>{
@@ -38,7 +39,8 @@ function LoginFacebook() {
         appId="236175084713564"
         autoLoad={false}
         callback={responseFacebook}
-         />
+        icon="fa-facebook"
+        />
     </div>
   );
 }

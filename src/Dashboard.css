@@ -60,6 +60,12 @@ font-weight: 400 !important;
     left: 10px;
 color: #777777;
 }
+.show_option > .integration{
+    font-size:18px;
+    position: relative;
+    left: 10px;
+color: #777777;
+}
 .show_sidebar{
     padding: 10px;
 }

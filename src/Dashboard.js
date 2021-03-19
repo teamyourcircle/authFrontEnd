@@ -87,7 +87,10 @@ const [isVerified,setisVerified] = useState(true);
                 <img src="https://www.flaticon.com/svg/static/icons/svg/2910/2910834.svg"/>
                 <a href="http://localhost:5000/developer/api-docs" className="api_docs"><h3>Api Docs</h3></a>
                 </div>
-        
+                <div className="show_option">
+                <img src="https://www.flaticon.com/svg/vstatic/svg/1087/1087930.svg?token=exp=1613485871~hmac=7bb9ee4d6d1a2d36435ae15452a8ee43"/>
+                <a href="/integration" className="integration"><h3>Integration</h3></a>
+                </div>
         </div>
  
       </React.Fragment>
@@ -95,9 +98,6 @@ const [isVerified,setisVerified] = useState(true);
     }
     </div>
   </div>
-     
-  <a href="/integration">integration</a>
-
 </div>
 </React.Fragment>
     );

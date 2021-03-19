@@ -2,7 +2,7 @@ import React,{useContext,useState} from 'react';
 import Cookies from 'js-cookie';
 import { GoogleLogin } from 'react-google-login';
 import {AuthContext} from './AuthContext';
-
+import './Google.css';
 const clientId ='391383527608-vq5pjfpslfeq4i10624rvt088eqhsa4p.apps.googleusercontent.com';
 
 function LoginGoogle() {
@@ -42,12 +42,11 @@ function LoginGoogle() {
     <div>
       <GoogleLogin
         clientId={clientId}
-        buttonText="Login"
+        buttonText="Login with Google"
         onSuccess={onSuccess}
         onFailure={onFailure}
         cookiePolicy={'single_host_origin'}
-        style={{ marginTop: '100px' }}
-        
+        className="google"
       />
     </div>
   );

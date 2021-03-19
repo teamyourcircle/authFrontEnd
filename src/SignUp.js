@@ -115,6 +115,10 @@ setispass(true);
         const classes = useStyles();
     return (
       <React.Fragment>
+           {ispassnotmatch ? (<CustomizedSnackbars severity={"error"} content={"Password Not Matched "}/>) : (null)} 
+      {!issixchar ? (<CustomizedSnackbars severity={"error"} content={"Password Should be of Atleast Six Characters "}/>) : (null)} 
+      {status==200 ?  (<CustomizedSnackbars severity={"success"} content={"Successfully Signed in  "}/>) : (null)}
+      {status==409 ?  (<CustomizedSnackbars severity={"error"} content={"Email Already Exists "}/>) : (null)}
           <div className="back">
           <Hidden  only={['sm', 'xs','md']}>
           <img src={signBoy}/>
@@ -122,10 +126,6 @@ setispass(true);
             <img src={signGirl}/>
         </Hidden>
           </div>
-      {ispassnotmatch ? (<CustomizedSnackbars severity={"error"} content={"Password Not Matched "}/>) : (null)} 
-      {!issixchar ? (<CustomizedSnackbars severity={"error"} content={"Password Should be of Atleast Six Characters "}/>) : (null)} 
-      {status==200 ?  (<CustomizedSnackbars severity={"success"} content={"Successfully Signed in  "}/>) : (null)}
-      {status==409 ?  (<CustomizedSnackbars severity={"error"} content={"Email Already Exists "}/>) : (null)}
       <div className="signup">
         { !isSignedUp ? 
       (<div className="signup_container">
@@ -198,10 +198,12 @@ setispass(true);
       value="submit"
       type="submit"
       >Sign Up</Button>
+      <div className="more">
       <AuthContextProvider>
        <LoginGoogle/>
        <LoginFacebook/>
       </AuthContextProvider>
+      </div>
       </form>
 <p>Already have an Account?
 <Link to="/login" className="link">Log In</Link></p>

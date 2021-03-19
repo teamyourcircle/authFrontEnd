@@ -1,3 +1,4 @@
 .MuiPaper-root{
     justify-content: center;
+    z-index: 1;
 }
