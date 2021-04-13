@@ -75,7 +75,7 @@ const [status,setStatus] = useState(0);
         
       if(data.email!="" && data.password!=""){
         setisLoggedIn(true);
-        const req = await fetch('http://localhost:5000/api/signin',options);
+        const req = await fetch('http://localhost:5000/auth/api/signin',options);
         setisLoggedIn(false);
         if(req.ok){
           const data = await req.json();
