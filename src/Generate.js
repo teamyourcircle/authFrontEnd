@@ -26,9 +26,9 @@ function Generate({ loaded, keys }) {
         }
       };
       console.log(body);
-      const url = "http://localhost:5000/api/token/generator";
+      const url = "http://localhost:5000/auth/api/generator";
       fetch(url, options).then(response => response.json()).then(data => {
-        setkey(data['hashed-token']);
+        setkey(data['api_key']);
         setisLoaded(false);
       })
     }

@@ -3,7 +3,7 @@ import Dashboard from './Dashboard'
 import ApiTable from './ApiTable'
 import { AuthContext} from './AuthContext'
 function Developers() {
-    const url = 'http://localhost:5000/api/users/dashboard'
+    const url = 'http://localhost:5000/auth/api/dashboard'
     const [is_Auth,setAuth,token,setToken] = useContext(AuthContext);
     const [isfullyLoaded,setisLoaded] = useState(false);  
     const options = {

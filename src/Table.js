@@ -53,10 +53,10 @@ export default function BasicTable() {
       },
       body:JSON.stringify({"pref": pf})
     };
-    const url = "http://localhost:5000/api/token/delete/apis";
+    const url = "http://localhost:5000/auth/api/delete/apis";
     fetch(url, optionsDel).then( res => res.json()).then( data => {
-      let newArr = state['apis_collection'].filter( (d,i) => { if(d['prefix'] !== pf) return d });
-      setstate({ 'apis_collection': newArr});
+      let newArr = state.filter( (d,i) => { if(d['prefix'] !== pf) return d });
+      setstate(newArr);
       setIsDeleted(!isDeleted);
     });
   }
@@ -71,7 +71,7 @@ export default function BasicTable() {
       },
       body:JSON.stringify({"pref": event.target.id})
     };
-    const url = "http://localhost:5000/api/token/put/apis";
+    const url = "http://localhost:5000/auth/api/put/apis";
     fetch(url, optionsEdit).then( res => res.json()).then( data => {
       console.log(data) 
       setHashed(data["hashed_token"]);
@@ -79,8 +79,8 @@ export default function BasicTable() {
     });
   }
   useEffect(() => {
-    if(state['apis_collection']!==undefined){
-      const array = state['apis_collection'];
+    if(state.length){
+      const array = state;
       let setrows = [];  
       for(var i=0;i<array.length;i++){
         let s = array[i];
@@ -102,11 +102,11 @@ export default function BasicTable() {
   }, [state]);
 
   useEffect(() => {
-    const url = "http://localhost:5000/api/token/get/apis";
+    const url = "http://localhost:5000/auth/api/get/apis";
     fetch(url,options).then(res =>res.json()).then(data=>{
-      setstate(data);
+      setstate(data.data);
       
-      console.log(data);
+      console.log(data.data);
     })
   }, [])
 
