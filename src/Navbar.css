@@ -1,0 +1,17 @@
+.navbar{
+    background-color:#28284E;
+    display: flex;
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom:15px;
+    padding-left: 15px;
+    padding-right: 15px;
+width:150%;
+}
+.navbar > h1{
+    font-family: 'Segoe UI', Geneva, Verdana, sans-serif;
+    color:white;
+    font-weight: Semibold;
+    margin-left: 5px;
+    font-size: 32px;
+}

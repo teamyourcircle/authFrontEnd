@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import CachedIcon from '@material-ui/icons/Cached';
 import Button from '@material-ui/core/Button'
 import './Login.css'
 import './ForgotPassword.css'
 import CustomizedSnackbars from './Snakbar';
-import forgotGirl from './images/forgotGirl.svg';
-import forgot from './images/forgot.svg'
-import Hidden from '@material-ui/core/Hidden';
 function ForgotPassword() {
   const [isVerfied,setIsVerified] = useState(false);
   const [email,setEmail] = useState('');
@@ -57,11 +53,7 @@ function ForgotPassword() {
         const classes = useStyles();
     return (
 <React.Fragment>
-<div className="back">
-      <Hidden  only={['sm', 'xs','md']}>
-      <img src={forgotGirl}/>
-        <img src={forgot}/>
-    </Hidden>
+<div className="back" style={{background:'#28284E'}}>
       </div>
       <div className="forgot">
        
@@ -75,12 +67,11 @@ function ForgotPassword() {
          <div className="mobile">
         <div class="mobile_look"></div>
         </div>
-    <CachedIcon/>
-      <h2>Reset Your Password</h2>
+      <h2>Reset Password</h2>
       <p style={{lineHeight:'27px',color:'grey'}}>Enter your Registered email 
           <br />address and we will send you a password reset link.</p>
       <TextField
-      fullWidth
+  fullWidth
           className={classes.margin}
           label="E-Mail"
           variant="outlined"
@@ -92,12 +83,12 @@ function ForgotPassword() {
       color="secondary"
       className={classes.button}
       size="large"
-      color="secondary"
+      style={{backgroundColor:'#28284E', fontSize:'20px', fontWeight:'normal', borderRadius:'13px', padding:'10px', marginLeft:'-20px'}}
       onClick={handleSubmit}
       value="submit"
       >
         
-        Send password reset Email
+        Send
       
       </Button>
           </div>

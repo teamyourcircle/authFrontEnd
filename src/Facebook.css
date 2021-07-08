@@ -2,9 +2,26 @@
     padding: 15px !important;
     font-weight: bold !important;
     text-transform: inherit !important;
-    box-shadow: rgba(0, 0, 0, 0.34) 0px 2px 2px 1px, rgba(0, 0, 0, 0.24) 0px 0px 1px 1px;
-        border: none !important;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: none !important;
     margin-left: 20px;
     outline: none;
     border-radius: 2px !important;
+    
+}
+.face{
+    cursor: pointer;
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 22px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 360px;
+height: 60px;
+justify-content: space-around;
+color: rgba(89, 83, 83, 1);
+outline: none;
+margin-top: 15px;
+margin-right: 35px;
 }
