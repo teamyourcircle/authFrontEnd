@@ -14,6 +14,7 @@ import Products from './Products'
 import Generate from './Generate'
 import Integration from './Integration';
 function App() {
+   console.log(process.env);
    return (
 <div className="app">
    <Router>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router";
-import CustomizedSnackbars from './Snakbar';
+import CustomizedSnackbars from '@teamyourcircle/oauth-integration';
 import { makeStyles } from '@material-ui/core/styles';
 import CachedIcon from '@material-ui/icons/Cached';
 import Visibility from '@material-ui/icons/Visibility';

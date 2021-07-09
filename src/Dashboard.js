@@ -4,7 +4,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { makeStyles } from '@material-ui/core/styles';
 import { AuthContext} from './AuthContext'
 import Button from '@material-ui/core/Button';
-import CustomizedSnackbars from './Snakbar';
+import {CustomizedSnackbars} from '@teamyourcircle/oauth-integration';
 import Avatar from '@material-ui/core/Avatar';
 
 function Dashboard() {
