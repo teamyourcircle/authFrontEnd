@@ -34,6 +34,7 @@ function SignUp() {
   const [ispassnotmatch, setispass] = useState(false);
   const [issixchar, setissixchar] = useState(true);
   const [status, setStatus] = useState(0);
+  const [metervalue, setmetervalue] = useState([{status:'veryWeak',color:'orangered'},{status:'weak',color:'orange'},{status:'good',color:'green'},{status:'excellent',color:'darkgreen'}])
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -189,8 +190,8 @@ function SignUp() {
                           label="First Name"
                           variant="outlined"
                           id="mui-theme-provider-outlined-input"
-                          value={values.email}
-                          onChange={handleChange("email")}
+                          value={values.firstName}
+                          onChange={handleChange("firstName")}
                         />
                         <TextField
                           style={{ width: "340px", marginLeft: "-20px" }}
@@ -201,8 +202,8 @@ function SignUp() {
                           label="Last Name"
                           variant="outlined"
                           id="mui-theme-provider-outlined-input"
-                          value={values.email}
-                          onChange={handleChange("email")}
+                          value={values.lastName}
+                          onChange={handleChange("lastName")}
                         />
                         </div>
                          <TextField
@@ -245,7 +246,15 @@ function SignUp() {
                             }
                             labelWidth={70}
                           />
-                          
+                          <div className="password-strength-meter">
+                            <div className="meter-content">
+                            <span className="meter" style={{background:`${metervalue[0].color}`}}></span>
+                            <span className="meter" style={{background:`${metervalue[1].color}`}}></span>
+                            <span className="meter" style={{background:`${metervalue[2].color}`}}></span>
+                            <span className="meter" style={{background:`${metervalue[3].color}`}}></span>
+                            </div>
+                            </div>
+                              <span className="password-status">Excellent</span>
                         </FormControl>
                         <FormControl
                           style={{ width: "340px", marginLeft: "-20px" }}
