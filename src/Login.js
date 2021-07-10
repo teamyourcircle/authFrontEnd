@@ -216,6 +216,8 @@ function Login(props) {
                           value={values.email}
                           onChange={handleChange("email")}
                         />
+                        
+                  
                         <FormControl
                           style={{ width: "340px", marginLeft: "-20px" }}
                           className={clsx(classes.margin, classes.textField)}
@@ -230,7 +232,7 @@ function Login(props) {
                             value={values.password}
                             onChange={handleChange("password")}
                             endAdornment={
-                              <InputAdornment position="end">
+                              <InputAdornment position="">
                                 <IconButton
                                   aria-label="toggle password visibility"
                                   onClick={handleClickShowPassword}
