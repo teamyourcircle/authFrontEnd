@@ -6,12 +6,24 @@
     padding-bottom:15px;
     padding-left: 15px;
     padding-right: 15px;
-width:150%;
+  justify-content:space-between;
 }
-.navbar > h1{
+.navbar_left > h1{
     font-family: 'Segoe UI', Geneva, Verdana, sans-serif;
     color:white;
     font-weight: Semibold;
     margin-left: 5px;
     font-size: 32px;
+}
+.navbar_left{
+    display: flex;
+    align-items: center;
+
+}
+.navbar-right{
+    color: white;
+    font-size:30px !important;
+}
+.navbar-search{
+    flex: 0.3;
 }
