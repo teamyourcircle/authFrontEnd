@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
+import { helper_module } from '@teamyourcircle/form-validator'
 import { makeStyles } from "@material-ui/core/styles";
-import CachedIcon from "@material-ui/icons/Cached";
+// import CachedIcon from "@material-ui/icons/Cached";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import FormControl from "@material-ui/core/FormControl";
@@ -13,10 +14,10 @@ import clsx from "clsx";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import "./SignUp.css";
-import { CustomizedSnackbars } from "@teamyourcircle/oauth-integration";
-import signBoy from "./images/signBoy.svg";
-import signMiddle from "./images/signMiddle.svg";
-import signGirl from "./images/signGirl.svg";
+// import { CustomizedSnackbars } from "@teamyourcircle/oauth-integration";
+// import signBoy from "./images/signBoy.svg";
+// import signMiddle from "./images/signMiddle.svg";
+// import signGirl from "./images/signGirl.svg";
 import Hidden from "@material-ui/core/Hidden";
 import LoginGoogle from "./Google_Login.js";
 import LoginFacebook from "./Facebook_Login.js";
@@ -34,8 +35,47 @@ function SignUp() {
   const [ispassnotmatch, setispass] = useState(false);
   const [issixchar, setissixchar] = useState(true);
   const [status, setStatus] = useState(0);
-  const [metervalue, setmetervalue] = useState([{status:'veryWeak',color:'orangered'},{status:'weak',color:'orange'},{status:'good',color:'green'},{status:'excellent',color:'darkgreen'}])
+  const [metervalue, setmetervalue] = useState([{ status: 'very-weak', color: '#b3a7a7' }, { status: 'weak', color: '#b3a7a7' }, { status: 'good', color: '#b3a7a7' }, { status: 'strong', color: '#b3a7a7' }])
+  const [visible, setvisible] = useState("none")
+  const [strength, setstrength] = useState({
+    status: '',
+    color: ''
+  })
+
   const handleChange = (prop) => (event) => {
+    if (prop === "password") {
+      setvisible(event.target.value.length > 0 ? "block" : "none")
+      const strengthValue = helper_module.validatePassword(event.target.value);
+
+      switch (strengthValue) {
+        case 0: setstrength({ ...strength, ["status"]: 'very-weak', ["color"]: '#E84545' })
+          metervalue[0].color = "#E84545"
+          metervalue[1].color = "#b3a7a7"
+          metervalue[2].color = "#b3a7a7"
+          metervalue[3].color = "#b3a7a7"
+          break;
+        case 1: setstrength({ ...strength, ["status"]: 'weak', ["color"]: '#E89345' })
+          metervalue[0].color = "#E89345"
+          metervalue[1].color = "#E89345"
+          metervalue[2].color = "#b3a7a7"
+          metervalue[3].color = "#b3a7a7"
+          break;
+        case 2: setstrength({ ...strength, ["status"]: 'good', ["color"]: '#59C664' })
+          metervalue[0].color = "#59C664"
+          metervalue[1].color = "#59C664"
+          metervalue[2].color = "#59C664"
+          metervalue[3].color = "#b3a7a7"
+          break;
+
+        case 3: setstrength({ ...strength, ["status"]: 'strong', ["color"]: '#0E8B1A' })
+          metervalue[0].color = "#0E8B1A"
+          metervalue[1].color = "#0E8B1A"
+          metervalue[2].color = "#0E8B1A"
+          metervalue[3].color = "#0E8B1A"
+          break;
+
+      }
+    }
     setValues({ ...values, [prop]: event.target.value });
   };
 
@@ -180,33 +220,33 @@ function SignUp() {
                       </svg>
 
                       <div className="info">
-                        <div className="full-name"> 
-                        <TextField
-                          style={{ width: "340px", marginLeft: "-20px" }}
-                          className={classes.margin}
-                          label="First Name"
-                          style={{ width: "340px", marginLeft: "-20px" }}
-                          className={classes.margin}
-                          label="First Name"
-                          variant="outlined"
-                          id="mui-theme-provider-outlined-input"
-                          value={values.firstName}
-                          onChange={handleChange("firstName")}
-                        />
-                        <TextField
-                          style={{ width: "340px", marginLeft: "-20px" }}
-                          className={classes.margin}
-                          label="Last Name"
-                          style={{ width: "340px"}}
-                          className={classes.margin}
-                          label="Last Name"
-                          variant="outlined"
-                          id="mui-theme-provider-outlined-input"
-                          value={values.lastName}
-                          onChange={handleChange("lastName")}
-                        />
+                        <div className="full-name">
+                          <TextField
+                            style={{ width: "340px", marginLeft: "-20px" }}
+                            className={classes.margin}
+                            label="First Name"
+                            style={{ width: "340px", marginLeft: "-20px" }}
+                            className={classes.margin}
+                            label="First Name"
+                            variant="outlined"
+                            id="mui-theme-provider-outlined-input"
+                            value={values.firstName}
+                            onChange={handleChange("firstName")}
+                          />
+                          <TextField
+                            style={{ width: "340px", marginLeft: "-20px" }}
+                            className={classes.margin}
+                            label="Last Name"
+                            style={{ width: "340px" }}
+                            className={classes.margin}
+                            label="Last Name"
+                            variant="outlined"
+                            id="mui-theme-provider-outlined-input"
+                            value={values.lastName}
+                            onChange={handleChange("lastName")}
+                          />
                         </div>
-                         <TextField
+                        <TextField
                           style={{ width: "340px", marginLeft: "-20px" }}
                           className={classes.margin}
                           label="E-Mail"
@@ -246,15 +286,15 @@ function SignUp() {
                             }
                             labelWidth={70}
                           />
-                          <div className="password-strength-meter">
+                          <div className="password-strength-meter" style={{ display: `${visible}` }}>
                             <div className="meter-content">
-                            <span className="meter" style={{background:`${metervalue[0].color}`}}></span>
-                            <span className="meter" style={{background:`${metervalue[1].color}`}}></span>
-                            <span className="meter" style={{background:`${metervalue[2].color}`}}></span>
-                            <span className="meter" style={{background:`${metervalue[3].color}`}}></span>
+                              <span className="meter" style={{ background: `${metervalue[0].color}` }}></span>
+                              <span className="meter" style={{ background: `${metervalue[1].color}` }}></span>
+                              <span className="meter" style={{ background: `${metervalue[2].color}` }}></span>
+                              <span className="meter" style={{ background: `${metervalue[3].color}` }}></span>
                             </div>
-                            </div>
-                              <span className="password-status">Excellent</span>
+                          </div>
+                          <span className="password-status" style={{ color: `${strength.color}` }}>{(!(values.password.length == 0)) ? strength.status : null}</span>
                         </FormControl>
                         <FormControl
                           style={{ width: "340px", marginLeft: "-20px" }}
@@ -267,13 +307,13 @@ function SignUp() {
                           <OutlinedInput
                             id="outlined-adornment-password"
                             type={values.showPassword ? "text" : "password"}
-                            value={values.password}
-                            onChange={handleChange("password")}
+                            value={values.repeat_password}
+                            onChange={handleChange("repeat_password")}
                             endAdornment={
                               <InputAdornment position="end">
                                 <IconButton
                                   aria-label="toggle password visibility"
-                                  onClick={handleClickShowPassword}
+                                  onClick={handleClickShowRepeatPassword}
                                   onMouseDown={handleMouseDownPassword}
                                   edge="end"
                                 >
@@ -287,10 +327,10 @@ function SignUp() {
                             }
                             labelWidth={70}
                           />
-                          
+
                         </FormControl>
                       </div>
-                      
+
                       <br />
                       <Button
                         variant="contained"
@@ -314,9 +354,9 @@ function SignUp() {
                       </Button>
                     </form>
                     <p>
-                    Already Have an Account ? 
+                      Already Have an Account ?
                       <Link to="/login" className="link">
-                      Log In
+                        Log In
                       </Link>
                     </p>
                     {/* <div class="status">
