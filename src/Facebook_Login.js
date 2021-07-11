@@ -81,7 +81,7 @@ function LoginFacebook({responseSummary,setResponseSummary,setisLoggedIn}) {
   };
 
   return (
-    <div>
+    <div style={{marginLeft: '25px'}}>
       {clientId ? (
         <FacebookLogin
           appId={clientId}

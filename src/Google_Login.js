@@ -96,7 +96,7 @@ function LoginGoogle({responseSummary,setResponseSummary,setisLoggedIn}) {
     }
   };
   return (
-    <div>
+    <div style={{marginLeft: '25px'}}>
       {
         clientId ? (
           <GoogleLogin

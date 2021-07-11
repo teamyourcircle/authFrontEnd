@@ -76,7 +76,7 @@ top: 60px;
 }
 .align{
     display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: space-around;
 }
 .login_container > .MuiSvgIcon-root{
