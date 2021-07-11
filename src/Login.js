@@ -125,9 +125,9 @@ function Login(props) {
             }
             Cookies.set("Token", data.token);
             Cookies.set("isAuth", isAuth);
-            window.open("/dashboard", "_self");
+            // window.open("/dashboard", "_self");
           }
-          setisLoggedIn(false);  
+          setisLoggedIn(false);
         });
     } else {
       setResponseSummary([
@@ -167,8 +167,18 @@ function Login(props) {
                     <form onSubmit={postData}>
                       <div className="more">
                         <AuthContextProvider>
-                          <LoginGoogle responseSummary={responseSummary} setResponseSummary={setResponseSummary} setisLoggedIn={setisLoggedIn}/>
-                          <LoginFacebook responseSummary={responseSummary} setResponseSummary={setResponseSummary} setisLoggedIn={setisLoggedIn} />
+                          <LoginGoogle
+                            responseSummary={responseSummary}
+                            setResponseSummary={setResponseSummary}
+                            setisLoggedIn={setisLoggedIn}
+                            context="Sign In With Google"
+                          />
+                          <LoginFacebook
+                            responseSummary={responseSummary}
+                            setResponseSummary={setResponseSummary}
+                            setisLoggedIn={setisLoggedIn}
+                            context="Sign In With Google"
+                          />
                         </AuthContextProvider>
                       </div>
                       <svg
@@ -216,6 +226,7 @@ function Login(props) {
                           value={values.email}
                           onChange={handleChange("email")}
                         />
+
                         <FormControl
                           style={{ width: "340px", marginLeft: "-20px" }}
                           className={clsx(classes.margin, classes.textField)}
@@ -230,7 +241,7 @@ function Login(props) {
                             value={values.password}
                             onChange={handleChange("password")}
                             endAdornment={
-                              <InputAdornment position="end">
+                              <InputAdornment position="">
                                 <IconButton
                                   aria-label="toggle password visibility"
                                   onClick={handleClickShowPassword}
