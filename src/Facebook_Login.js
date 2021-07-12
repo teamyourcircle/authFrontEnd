@@ -5,7 +5,7 @@ import FacebookLogin from "react-facebook-login";
 import FaceBookButton from "./FaceBookButton";
 import "./Facebook.css";
 
-function LoginFacebook({responseSummary,setResponseSummary,setisLoggedIn}) {
+function LoginFacebook({responseSummary,setResponseSummary,setisLoggedIn,context}) {
   const [isAuth, setAuth] = useContext(AuthContext);
   const [clientId, setClientId] = useState("");
   const { REACT_APP_AUTH_SERVICE_BASE_URL } = process.env;
@@ -74,14 +74,14 @@ function LoginFacebook({responseSummary,setResponseSummary,setisLoggedIn}) {
           }
           Cookies.set("Token", data.token);
           Cookies.set("isAuth", isAuth);
-          window.open("/dashboard", "_self");
+          // window.open("/dashboard", "_self");
         }
         setisLoggedIn(false);
       });
   };
 
   return (
-    <div>
+    <div style={{marginLeft: '25px'}}>
       {clientId ? (
         <FacebookLogin
           appId={clientId}
@@ -89,7 +89,7 @@ function LoginFacebook({responseSummary,setResponseSummary,setisLoggedIn}) {
           autoLoad={false}
           callback={responseFacebook}
           cssClass="face"
-          icon={<FaceBookButton />}
+          icon={<FaceBookButton context={context} />}
         />
       ) : null}
     </div>

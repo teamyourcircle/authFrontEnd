@@ -1,7 +1,11 @@
-.signup{
-   padding: 12px;
+.login_complete{
+    overflow: hidden;
+}
+.login{
     display: grid;
-    place-items: center;
+    place-items: right;
+    justify-content: right;
+    padding:12px;
 }
 .mobile_look{
     background-color: #f2f2f2;
@@ -18,72 +22,123 @@
     position: relative;
     bottom: 70px;
 }
-.signup_container > h2{
+
+.MuiButton-label{
+    font-weight: bold !important;
+}
+.login_container > h2{
     font-weight:700;
-    font-size:28px;
+    font-size:36px;
     color: #525252;
 }
-.signup_container > button{
+.login_container > button{
     margin-top:50px;
     text-transform: inherit !important;
     width: 100%;
     color: white;
-font-weight: bold !important;
+font-weight: bold;
+}
+.MuiButton-containedSecondary {
+    color: #fff;
+    background-color: #f50057;
+    width: 100% !important;
+    margin-top: 20px !important;
+    margin-left: 10px !important;
+    height: 44px !important;
+}
+.forgot_password{
+    float: right;
+    text-decoration: none;
+    margin-right: 50px;
+
 }
 .link{
     text-decoration: none;
 font-weight: bold;
+position: relative;
+left: 10px;
 }
-.signup_container{
-    padding:50px;
+.login_container{
+    padding-left: 10px;
+    padding-right: 10px;
+  padding-top: 50px;
+    padding-bottom: 200px;
     text-align: center;
-    background-color:rgb(248 248 248);
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),0 1px 2px rgba(0, 0, 0, 0.24);
+    background-color:WHITE;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(4px);
     position: relative;
-    top:-62px;
+   top:-62px;
+   border-radius: 50px 50px 0px 0px;
+position: relative;
+top: 60px;
 }
-.signup_container > .MuiSvgIcon-root{
+.align{
+    display: flex;
+    align-items: end;
+    justify-content: space-around;
+}
+.login_container > .MuiSvgIcon-root{
     font-size:60px;
 animation: image 6s infinite;
 }
-@keyframes image{
-    0%{
-        transform: rotate(0deg);
-        color: red;
-    }
-    20%{
-        color: rgb(243, 51, 51);
-    }
-    40%{
-        color: rgb(204, 65, 65);
-    }
-    60%{
-        color: rgb(240, 45, 45);
-    }
-    80%{
-        color: rgb(253, 74, 74);
-    }
-    100%{
-        transform: rotate(360deg);
-       color: red;
-    }
-}
-.back > img{
-    height: 160px;
-    padding: 30px;
-}
-.back{
-    background-color: #f50057;
-    height: 27vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.MuiOutlinedInput-input{
+    padding: 16.5px 14px !important;
 }
 .more{
     margin-top: 20px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-justify-content: center;
-margin-left: 35px !important;
+}
+.text > h2{
+    color: #595353;
+    font-size:36px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+
+}
+.text{
+    padding:0 30px;
+}
+.text > p{
+    color: #595353;
+    font-size:24px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 773px;
+    height: 56px;
+    line-height: 24px;
+}
+.info{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-left:30px !important;
+    margin-top: 10px;
+}
+.full-name{
+    display: flex;
+    width: 328px;
+}
+.password-strength-meter{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2px;
+}
+.meter{
+    width: 100%;
+    height: 6px;
+    border-radius: 6px;
+    margin-left: 1.8px;
+}
+.meter-content{
+    width: 100%;
+    display: flex;
+}
+.password-status{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 12px;
+
 }

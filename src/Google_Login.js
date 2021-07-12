@@ -4,7 +4,7 @@ import { GoogleLogin } from "react-google-login";
 import { AuthContext } from "./AuthContext";
 import "./Google.css";
 
-function LoginGoogle({responseSummary,setResponseSummary,setisLoggedIn}) {
+function LoginGoogle({responseSummary,setResponseSummary,setisLoggedIn,context}) {
   const {REACT_APP_AUTH_SERVICE_BASE_URL} = process.env;
   const [isAuth, setAuth] = useContext(AuthContext);
   const [clientId,setClientId] = useState('');
@@ -70,7 +70,7 @@ function LoginGoogle({responseSummary,setResponseSummary,setisLoggedIn}) {
         }
         Cookies.set("Token", data.token);
         Cookies.set("isAuth", isAuth);
-        window.open("/dashboard", "_self");
+        // window.open("/dashboard", "_self");
       }
       setisLoggedIn(false);
     });
@@ -96,12 +96,12 @@ function LoginGoogle({responseSummary,setResponseSummary,setisLoggedIn}) {
     }
   };
   return (
-    <div>
+    <div style={{marginLeft: '25px'}}>
       {
         clientId ? (
           <GoogleLogin
           clientId={clientId}
-          buttonText="Sign in with Google"
+          buttonText={context}
           onSuccess={onSuccess}
           onFailure={onFailure}
           cookiePolicy={"single_host_origin"}
@@ -133,7 +133,7 @@ function LoginGoogle({responseSummary,setResponseSummary,setisLoggedIn}) {
                   fill="#28284E"
                 />
               </svg>
-              Sign in with Google
+              {context}
             </button>
           )}
         />
