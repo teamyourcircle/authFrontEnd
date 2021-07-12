@@ -5,6 +5,8 @@ import Button from "@material-ui/core/Button";
 import { AuthContext } from "./AuthContext";
 import Temporary from "./Temporary";
 import { makeStyles } from "@material-ui/core/styles";
+import { CustomizedSnackbars } from "@teamyourcircle/oauth-integration";
+
 const useStyles = makeStyles({
   button: {
     width: "443px",
@@ -26,12 +28,14 @@ const useStyles = makeStyles({
   checked: {},
 });
 function Generate({ loaded, keys }) {
+  const { REACT_APP_AUTH_SERVICE_BASE_URL } = process.env;
   const [apiname, setapiname] = React.useState();
   const [scopes, setScopes] = React.useState([]);
   // eslint-disable-next-line no-unused-vars
   const [is_Auth, setAuth, token, setToken] = useContext(AuthContext);
   const [isLoaded, setisLoaded] = useState(loaded);
   const [key, setkey] = useState(keys);
+  const [responseSummary, setResponseSummary] = useState([]);
   const classes = useStyles();
   const handleSubmit = () => {
     const body = {
@@ -47,13 +51,26 @@ function Generate({ loaded, keys }) {
         Accept: "application/json",
       },
     };
-    console.log(body);
-    const url = "http://localhost:5000/auth/api/generator";
+    let status;
+    const url = REACT_APP_AUTH_SERVICE_BASE_URL + "/auth/api/generator";
     fetch(url, options)
-      .then((response) => response.json())
+      .then((res) => {
+        status = res.status;
+        return res.json();
+      })
       .then((data) => {
-        setkey(data["api_key"]);
-        setisLoaded(false);
+        if (status !== 200) {
+          setResponseSummary([
+            {
+              status,
+              content: data.message,
+              severity: "error",
+            },
+          ]);
+        } else {
+          setkey(data["api_key"]);
+          setisLoaded(false);
+        }
       });
   };
 
@@ -136,6 +153,16 @@ function Generate({ loaded, keys }) {
                 Create
               </Button>
             </div>
+            <div class="status">
+                      {responseSummary.length
+                        ? responseSummary.map((r) => (
+                            <CustomizedSnackbars
+                              content={r.content}
+                              severity={r.severity}
+                            />
+                          ))
+                        : null}
+                    </div>
           </React.Fragment>
         ) : (
           <Temporary api_key={key} />
