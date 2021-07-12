@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import "./Generate.css";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
@@ -28,6 +28,7 @@ const useStyles = makeStyles({
 function Generate({ loaded, keys }) {
   const [apiname, setapiname] = React.useState();
   const [scopes, setScopes] = React.useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [is_Auth, setAuth, token, setToken] = useContext(AuthContext);
   const [isLoaded, setisLoaded] = useState(loaded);
   const [key, setkey] = useState(keys);
