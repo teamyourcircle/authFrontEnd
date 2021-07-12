@@ -177,7 +177,7 @@ function Login(props) {
                             responseSummary={responseSummary}
                             setResponseSummary={setResponseSummary}
                             setisLoggedIn={setisLoggedIn}
-                            context="Sign In With Google"
+                            context="Sign In With FaceBook"
                           />
                         </AuthContextProvider>
                       </div>
