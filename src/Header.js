@@ -1,78 +1,4 @@
-// import React from 'react';
-// import './Header.css';
-// import { makeStyles } from '@material-ui/core/styles';
-// import Avatar from '@material-ui/core/Avatar';
-// import Badge from '@material-ui/core/Badge';
-// import { withStyles } from '@material-ui/core/styles';
-// import Popover from '@material-ui/core/Popover';
-// import {Link} from 'react-router-dom';
-// import Button from '@material-ui/core/Button';
-// function Header() {
-//   const StyledBadge = withStyles((theme) => ({
-//     badge: {
-//       right: -3,
-//       top: 13,
-//       border: `2px solid ${theme.palette.background.paper}`,
-//       padding: '0 4px',
-//     },
-//   }))(Badge);
-//     const useStyles = makeStyles((theme) => ({
-//         button: {
-//           margin: theme.spacing(1),
-//         },
-//       }));
-//     //const classes = useStyles();
-    
-//     const classes = useStyles();
-//     const [anchorEl, setAnchorEl] = React.useState(null);
-  
-//     const handleClick = (event) => {
-//       setAnchorEl(event.currentTarget);
-//     };
-  
-//     const handleClose = () => {
-//       setAnchorEl(null);
-//     };
-  
-//     const open = Boolean(anchorEl);
-//     const id = open ? 'simple-popover' : undefined;
-//     return (
-//     <nav className="header">
-//       <div className="header_brand">
-//       <img src="https://i.ibb.co/1Jx9SJV/White-and-Purple-Icon-Internet-Logo-2-removebg-preview.png" style={{height:'200px'}}/>
-//         <h1>CIRCLE</h1>
-//       </div>
 
-// <div className="header_button"> 
-
-// <Popover
-//         id={id}
-//         open={open}
-//         anchorEl={anchorEl}
-//         onClose={handleClose}
-//         anchorOrigin={{
-//           vertical: 'bottom',
-//           horizontal: 'center',
-//         }}
-//         transformOrigin={{
-//           vertical: 'top',
-//           horizontal: 'center',
-//         }}
-//       >
-//     <Button variant="contained" >
-//     <Link to="/signout" activeClassName="active">Log Out</Link>
-//     </Button>
-
-    
-//       </Popover>
-//       <Button onClick={handleClick}>
-//       <Avatar style={{marginRight:'10px'}}/>
-//       </Button>
-
-// </div>
-//     </nav>
-//     );
-// }
 import React from "react";
 import "./Navbar.css";
 import SearchIcon from "@material-ui/icons/Search";
@@ -83,6 +9,93 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import Hidden from "@material-ui/core/Hidden";
 import PropTypes from "prop-types";
+import Avatar from '@material-ui/core/Avatar';
+import {deepPurple } from '@material-ui/core/colors';
+
+import Popover from '@material-ui/core/Popover';
+import Cookies from 'js-cookie'
+import Button from '@material-ui/core/Button';
+import { useHistory } from "react-router-dom";
+const useStyles = makeStyles((theme) => ({
+  typography: {
+    padding: theme.spacing(2),
+  },
+  purple: {
+    color: theme.palette.getContrastText(deepPurple[500]),
+    backgroundColor: deepPurple[500],
+    width: '44px',
+    height: '44px'
+
+  },
+  button: {
+    width: '41px',
+    height: '16px',
+    textTransform: 'none',    
+    height: '26px',
+    fontSize: '11px',
+    width:'78px',
+    color:'#FFFFFF'
+
+  }
+}));
+function SimplePopover({ handleClick, handleClose, anchorEl }) {
+  const classes = useStyles();
+  const history = useHistory();
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
+  const handleLogout = () => {
+
+    Cookies.remove('Token', { path: '' })
+    Cookies.remove('isAuth', { path: '' })
+    history.push('/login')
+  }
+
+  return (
+    <div>
+
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+      >
+     
+        <div
+          className="box-container" style={{
+            width: '233px',
+            height: '91px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-around'
+          }}>
+          <Avatar className={classes.purple}>OP</Avatar>
+          <div className="box-content" style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'end',
+            height:'49px',
+            justifyContent: 'space-evenly'
+          }}>
+            <span style={{ fontSize: '11px',fontWeight:'bold' }}>mohsin.khan.cs.2018@miet.ac.in</span>
+            <Button aria-describedby={id}  variant="contained" className={classes.button} style={{ backgroundColor: '#28284E'}}onClick={handleLogout}>
+              Log Out
+            </Button>
+          </div>
+        </div>
+      </Popover>
+    </div>
+  );
+}
+
 function Navbar(props) {
   const useStyles = makeStyles((theme) => ({
     search: {
@@ -126,6 +139,15 @@ function Navbar(props) {
     },
   }));
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <div className="navbar">
       <div className="navbar_left">
@@ -193,7 +215,8 @@ function Navbar(props) {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle fontSize="large" />
+          <AccountCircle fontSize="large" onClick={handleClick} />
+          <SimplePopover handleClick={handleClick} handleClose={handleClose} anchorEl={anchorEl} />
         </IconButton>
         <IconButton
           aria-label="display more actions"

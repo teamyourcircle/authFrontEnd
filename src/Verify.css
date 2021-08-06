@@ -1,0 +1,54 @@
+.setPassimg{
+    width: 721px;
+    height: 618px;
+}
+
+.mobileBackground{
+    width: 681px;
+    height: 450.56px;
+}
+.page-content{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 181px;
+
+}
+.verify-content{
+    position: absolute;
+    top: 44px;
+    display: flex;
+    width: 84%;
+    justify-content: center;
+    align-items: center;
+    height: 341px;
+    flex-direction: column;
+    line-height: 0px;
+}
+.verify-content p{
+    font-family: Segoe UI;
+font-size: 23px;
+font-style: normal;
+font-weight: 400;
+line-height: 20px;
+letter-spacing: 0em;
+text-align: center;
+width: 485px;
+
+}
+.right-section{
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.verify-content h2{
+    font-family: Segoe UI;
+font-size: 34px;
+font-style: normal;
+font-weight: 700; 
+color: #595353;
+}
+.MuiFormControl-fullWidth {
+    width: 85%;
+}

@@ -416,11 +416,11 @@ function SignUp() {
                     <div class="status">
                       {responseSummary.length
                         ? responseSummary.map((r) => (
-                            <CustomizedSnackbars
-                              content={r.content}
-                              severity={r.severity}
-                            />
-                          ))
+                          <CustomizedSnackbars
+                            content={r.content}
+                            severity={r.severity}
+                          />
+                        ))
                         : null}
                     </div>
                   </div>

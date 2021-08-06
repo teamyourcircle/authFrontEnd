@@ -12,7 +12,13 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import clsx from "clsx";
 import Button from "@material-ui/core/Button";
-import "./SignUp.css";
+import "./Verify.css";
+import Navbar from "./Navbar";
+// import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import setPassImg1 from './images/setPassImg1.svg'
+import mobileBackground from './images/verify-mobile-background.svg'
 
 function Verify() {
   let { token } = useParams();
@@ -33,7 +39,17 @@ function Verify() {
   const useStyles = makeStyles((theme) => ({
     margin: {
       margin: theme.spacing(1),
+      width: '88%'
     },
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
+    },
+    
   }));
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
@@ -110,8 +126,9 @@ function Verify() {
   const classes = useStyles();
 
   return (
-    <div>
-      <CachedIcon />
+    <>
+      <Navbar/>
+      {/* <CachedIcon />
       <FormControl
         fullWidth
         className={clsx(classes.margin, classes.textField)}
@@ -178,8 +195,108 @@ function Verify() {
         onClick={postData}
       >
         Submit
-      </Button>
+      </Button> */}
+      <div className="page-content">
+      {/* <div className={classes.root}>
+      <Grid container spacing={3}>
+       
+        <Grid item xs={12} sm={6}> */}
+          <div className="left-section">
+          <img src={setPassImg1} className="setPassimg"/>
+          </div>
+        {/* </Grid> */}
+        {/* <Grid item xs={12} sm={6}> */}
+          <div className="right-section">
+          <img src={mobileBackground} className="mobileBackground"/>
+          <div className="verify-content">
+          <h2>Password Reset</h2>
+          {/* <div classname="para-content"> */}
+          <p>Enter your new password for your circle account</p>
+          <FormControl
+        fullWidth
+        className={clsx(classes.margin, classes.textField)}
+        variant="outlined"
+      >
+        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+        <OutlinedInput
+          id="outlined-adornment-password"
+          type={values.showPassword ? "text" : "password"}
+          value={values.password}
+          onChange={handleChange("password")}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          }
+          labelWidth={70}
+        />
+      </FormControl>
+      <FormControl
+        fullWidth
+        className={clsx(classes.margin, classes.textField)}
+        variant="outlined"
+      >
+        <InputLabel htmlFor="outlined-adornment-password">
+          Repeat Password
+        </InputLabel>
+        <OutlinedInput
+          id="outlined-adornment-password"
+          type={values.showRepeatPassword ? "text" : "password"}
+          value={values.repeat_password}
+          onChange={handleChange("repeat_password")}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowRepeatPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {values.showRepeatPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          }
+          labelWidth={130}
+        />
+      </FormControl>
+
+      <Button
+        variant="contained"
+        className={classes.button}
+        color="secondary"
+        value="submit"
+        type="submit"
+        style={{
+          backgroundColor: "#28284E",
+          fontSize: "22.74px",
+          fontWeight: "normal",
+          borderRadius: "5.69px",
+          textTransform:"initial"
+        }}
+        onClick={postData}
+      >
+        Change My Password
+      </Button> 
+          {/* <span>
+            </span> */}
+            {/* </div> */}
+            </div>
+          </div>
+        {/* </Grid> */}
+       
+        
+        
+      {/* </Grid> */}
     </div>
+    {/* </div> */}
+    </>
   );
 }
 
