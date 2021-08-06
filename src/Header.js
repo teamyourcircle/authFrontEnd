@@ -1,4 +1,3 @@
-
 import React from "react";
 import "./Navbar.css";
 import SearchIcon from "@material-ui/icons/Search";
@@ -9,13 +8,11 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import Hidden from "@material-ui/core/Hidden";
 import PropTypes from "prop-types";
-import Avatar from '@material-ui/core/Avatar';
-import {deepPurple } from '@material-ui/core/colors';
-
-import Popover from '@material-ui/core/Popover';
-import Cookies from 'js-cookie'
-import Button from '@material-ui/core/Button';
-import { useHistory } from "react-router-dom";
+import Avatar from "@material-ui/core/Avatar";
+import { deepPurple } from "@material-ui/core/colors";
+import Popover from "@material-ui/core/Popover";
+import Button from "@material-ui/core/Button";
+import { AuthContext } from "./AuthContext";
 const useStyles = makeStyles((theme) => ({
   typography: {
     padding: theme.spacing(2),
@@ -23,70 +20,75 @@ const useStyles = makeStyles((theme) => ({
   purple: {
     color: theme.palette.getContrastText(deepPurple[500]),
     backgroundColor: deepPurple[500],
-    width: '44px',
-    height: '44px'
-
+    width: "44px",
+    height: "44px",
   },
   button: {
-    width: '41px',
-    height: '16px',
-    textTransform: 'none',    
-    height: '26px',
-    fontSize: '11px',
-    width:'78px',
-    color:'#FFFFFF'
-
-  }
+    width: "41px",
+    height: "16px",
+    textTransform: "none",
+    height: "26px",
+    fontSize: "11px",
+    width: "78px",
+    color: "#FFFFFF",
+  },
 }));
-function SimplePopover({ handleClick, handleClose, anchorEl }) {
+function SimplePopover({ handleClick, handleClose, anchorEl, email }) {
   const classes = useStyles();
-  const history = useHistory();
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  const id = open ? "simple-popover" : undefined;
 
   const handleLogout = () => {
-
-    Cookies.remove('Token', { path: '' })
-    Cookies.remove('isAuth', { path: '' })
-    history.push('/login')
-  }
+    window.open("/signout", "_self");
+  };
 
   return (
     <div>
-
       <Popover
         id={id}
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
+          vertical: "bottom",
+          horizontal: "center",
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
+          vertical: "top",
+          horizontal: "center",
         }}
       >
-     
         <div
-          className="box-container" style={{
-            width: '233px',
-            height: '91px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-around'
-          }}>
+          className="box-container"
+          style={{
+            width: "233px",
+            height: "91px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-around",
+          }}
+        >
           <Avatar className={classes.purple}>OP</Avatar>
-          <div className="box-content" style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'end',
-            height:'49px',
-            justifyContent: 'space-evenly'
-          }}>
-            <span style={{ fontSize: '11px',fontWeight:'bold' }}>mohsin.khan.cs.2018@miet.ac.in</span>
-            <Button aria-describedby={id}  variant="contained" className={classes.button} style={{ backgroundColor: '#28284E'}}onClick={handleLogout}>
+          <div
+            className="box-content"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "end",
+              height: "49px",
+              justifyContent: "space-evenly",
+            }}
+          >
+            <span style={{ fontSize: "11px", fontWeight: "bold" }}>
+              {email}
+            </span>
+            <Button
+              aria-describedby={id}
+              variant="contained"
+              className={classes.button}
+              style={{ backgroundColor: "#28284E" }}
+              onClick={handleLogout}
+            >
               Log Out
             </Button>
           </div>
@@ -140,6 +142,24 @@ function Navbar(props) {
   }));
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [user, setUser] = React.useState();
+  const { REACT_APP_AUTH_SERVICE_BASE_URL } = process.env;
+  const [is_Auth, setAuth, token, setToken] = React.useContext(AuthContext);
+  React.useEffect(() => {
+    const options = {
+      method: "GET",
+      headers: {
+        "access-token": token,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    };
+    fetch(REACT_APP_AUTH_SERVICE_BASE_URL + "/auth/api/dashboard", options)
+      .then((response) => response.json())
+      .then((data) => {
+        setUser(data);
+      });
+  }, []);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -215,8 +235,17 @@ function Navbar(props) {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle fontSize="large" onClick={handleClick} />
-          <SimplePopover handleClick={handleClick} handleClose={handleClose} anchorEl={anchorEl} />
+          {user && user.email ? (
+            <>
+              <AccountCircle fontSize="large" onClick={handleClick} />
+              <SimplePopover
+                handleClick={handleClick}
+                handleClose={handleClose}
+                anchorEl={anchorEl}
+                email={user.email}
+              />
+            </>
+          ) : null}
         </IconButton>
         <IconButton
           aria-label="display more actions"
@@ -234,6 +263,5 @@ Navbar.propTypes = {
 };
 
 export default Navbar;
-
 
 // export default Header;
