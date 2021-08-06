@@ -27,3 +27,17 @@
 .navbar-search{
     flex: 0.3;
 }
+
+@media only screen and (max-width: 768px) {
+
+    
+    
+    .navbar {
+        width: 151.2vw;
+    }
+    
+    body {
+        width: 139vw;
+    }
+    
+}

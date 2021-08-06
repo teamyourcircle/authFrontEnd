@@ -126,9 +126,9 @@
         flex-direction: column;
         height: 253px;
     }
-    .navbar{
-        width:103.1vw
-    }
+    .navbar {
+      width: 113.6%;
+  }
     .App_token{
         height: 482px;
         display: flex;
@@ -174,11 +174,9 @@
     align-items: end;
     line-height: 50px;
     }
-    .navbar{
-        
-    width: 133.2vw;
-
-    }
+    .navbar {
+      width: 116.1%;
+  }
     .bottom-ruler{
         width: 99.5%;
         margin-top: 42px;
