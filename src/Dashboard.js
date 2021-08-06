@@ -136,20 +136,13 @@ function Dashboard() {
                         <Tab label={<span style={{
                           color: '#28284E', fontWeight: '600',
                           fontFamily: 'Segoe UI'
-                        }}>Pinned</span>} {...a11yProps(1)} />
-                        <Tab label={<span style={{
-                          color: '#28284E', fontWeight: '600',
-                          fontFamily: 'Segoe UI'
-                        }}>API</span>} {...a11yProps(2)} />
+                        }}>API</span>} {...a11yProps(1)} />
                       </Tabs>
                     </AppBar>
                     <TabPanel value={value} index={0}>
                      <Recent/>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                      Suhail
-                    </TabPanel>
-                    <TabPanel value={value} index={2}>
                      <Table/>
                     </TabPanel>
                   </div>
