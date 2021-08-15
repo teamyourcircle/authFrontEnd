@@ -19,6 +19,9 @@ const useStyles = makeStyles({
     fontSize: "26px",
     lineHeight: "16px",
     color: "#FFFFFF",
+    "&:focus":{
+      backgroundColor:'#28284e'
+    }
   },
   root: {
     "&$checked": {

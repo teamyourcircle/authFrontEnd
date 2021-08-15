@@ -14,13 +14,16 @@ const useStyles = makeStyles({
     fontSize: '26px',
     lineHeight: '16px',
     color: '#FFFFFF',  
+    "&:focus":{
+      backgroundColor:'#28284e'
+    }
   },
   root: {
     "&$checked": {
       color: "#28284E"
     }
   },
-  checked: {}
+ 
 });
 function Temporary({api_key}) {
   const classes = useStyles();
@@ -36,7 +39,7 @@ function Temporary({api_key}) {
             <span className="high">It will displayed only now</span>
                 <p style={{display:'flex',alignItems: 'center',paddingLeft:'9px'}}>{api_key}</p>
             <span className="warn">
-              Please store it somewhrere safe because as soon as you navigate away
+              Please store it somewhere safe because as soon as you navigate away
               from this <br /> page, we will not albe to restore or retrive this
               generated token.
             </span>
