@@ -9,7 +9,7 @@ import Paper from "@material-ui/core/Paper";
 import formLogo from "./images/recent-form-logo.svg";
 import { AuthContext } from "./AuthContext";
 import ReactTimeAgo from 'react-time-ago'
-
+import nothingFound from "./images/nothingFound.svg";
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -31,6 +31,19 @@ function createData(FormName, time) {
 
 function createRow(formName, time) {
   return createData(formName, time);
+}
+
+function NotFoundVector() {
+  return(
+<div style={{
+      display:'flex',
+      justifyContent:'center'
+    }}>
+    
+    <img src={nothingFound} alt="nothing-found" />
+    
+      </div>
+  )
 }
 export default function BasicTable() {
   const classes = useStyles();
@@ -73,6 +86,7 @@ export default function BasicTable() {
       });
   }, []);
   return (
+    <>
     <TableContainer component={Paper}>
       {isLoaded ? (
         <Table className={classes.table} aria-label="simple table">
@@ -97,7 +111,7 @@ export default function BasicTable() {
                 ))}
               </>
             ) : (
-              <>no recent activity found</>
+             null
             )}
           </TableBody>
         </Table>
@@ -105,5 +119,10 @@ export default function BasicTable() {
         <>loading..</>
       )}
     </TableContainer>
+    {
+      (rows && rows.length)?null: (<NotFoundVector/>)
+    }
+      </>
+   
   );
 }
