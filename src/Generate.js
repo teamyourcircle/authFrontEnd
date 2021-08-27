@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Generate.css";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   },
   checked: {},
 });
-function Generate({ loaded, keys }) {
+function Generate({ loaded, keys, setBack }) {
   const { REACT_APP_AUTH_SERVICE_BASE_URL } = process.env;
   const [apiname, setapiname] = React.useState();
   const [scopes, setScopes] = React.useState([]);
@@ -157,18 +157,18 @@ function Generate({ loaded, keys }) {
               </Button>
             </div>
             <div class="status">
-                      {responseSummary.length
-                        ? responseSummary.map((r) => (
-                            <CustomizedSnackbars
-                              content={r.content}
-                              severity={r.severity}
-                            />
-                          ))
-                        : null}
-                    </div>
+              {responseSummary.length
+                ? responseSummary.map((r) => (
+                    <CustomizedSnackbars
+                      content={r.content}
+                      severity={r.severity}
+                    />
+                  ))
+                : null}
+            </div>
           </React.Fragment>
         ) : (
-          <Temporary api_key={key} />
+          <Temporary api_key={key} setBack={setBack} />
         )}
       </div>
     </div>

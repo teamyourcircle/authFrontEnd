@@ -33,6 +33,7 @@ export default function BasicTable() {
   const [state, setstate] = React.useState([]);
   const [is_Auth,setAuth,token,setToken] = useContext(AuthContext);
   const [isloaded, setisloaded] = useState(false)
+  const [back, setBack] = useState(false);
   const options = {
     method: 'GET',
     headers:{
@@ -105,15 +106,18 @@ export default function BasicTable() {
     const url = "http://localhost:5000/auth/api/get/apis";
     fetch(url,options).then(res =>res.json()).then(data=>{
       setstate(data.data);
-      
       console.log(data.data);
     })
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    console.log('isBacked ? '+back)
+  }, [back]);
 
   return (
     <React.Fragment>
       {
-        !isEdit ? (
+        !isEdit || back ? (
           <div>{
             isloaded ? (
             <TableContainer component={Paper}>
@@ -133,14 +137,14 @@ export default function BasicTable() {
                       <TableCell align="right">{row.prefix}</TableCell>
                       <TableCell align="right">{row.scopes}</TableCell>
                       <TableCell align="right">{row.actions}</TableCell>
-                      
+
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
             </TableContainer>) : (null)
           }</div>
-        ) : ( <Generate loaded={false} keys={hashed}/>)
+        ) : ( <Generate loaded={false} keys={hashed} setBack={setBack}/>)
       }
     </React.Fragment>
   );

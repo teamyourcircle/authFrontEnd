@@ -13,7 +13,7 @@ function ProtectedRoute({component:Component , ...rest}) {
         }
         else
         return  <Redirect to={{ pathname: '/login' }} />
-        
+
         }}/>
 
     );
