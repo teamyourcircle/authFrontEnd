@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
 import { AuthContext} from './AuthContext'
 import Generate from "./Generate";
+import { CustomizedSnackbars } from "@teamyourcircle/oauth-integration";
 
 const useStyles = makeStyles({
   table: {
@@ -31,9 +32,17 @@ export default function BasicTable() {
   const [hashed, setHashed] = React.useState("");
   const [isEdit, setIsEdit] = React.useState(false);
   const [state, setstate] = React.useState([]);
+  const [responseSummary, setResponseSummary] = useState([]);
   const [is_Auth,setAuth,token,setToken] = useContext(AuthContext);
-  const [isloaded, setisloaded] = useState(false)
+  const [isloaded, setisloaded] = useState(false);
   const [back, setBack] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      if (responseSummary.length)
+        setResponseSummary(responseSummary.length - 1, 1);
+    }, 5000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDeleted]);
   const options = {
     method: 'GET',
     headers:{
@@ -52,11 +61,51 @@ export default function BasicTable() {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body:JSON.stringify({"pref": pf})
+      body:JSON.stringify({"prefix": pf})
     };
     const url = "http://localhost:5000/auth/api/delete/apis";
     fetch(url, optionsDel).then( res => res.json()).then( data => {
       let newArr = state.filter( (d,i) => { if(d['prefix'] !== pf) return d });
+      const status = data.statusCode;
+      if (status != 200) {
+        try {
+          setResponseSummary([
+            ...responseSummary,
+            {
+              status,
+              content: data.msg,
+              severity: "error",
+            },
+          ]);
+        } catch (err) {
+          setResponseSummary([
+            {
+              status,
+              content: data.msg,
+              severity: "error",
+            },
+          ]);
+        }
+      } else {
+        try {
+          setResponseSummary([
+            ...responseSummary,
+            {
+              status,
+              content: data.msg,
+              severity: "success",
+            },
+          ]);
+        } catch (err) {
+          setResponseSummary([
+            {
+              status,
+              content: data.msg,
+              severity: "success",
+            },
+          ]);
+        }
+      }
       setstate(newArr);
       setIsDeleted(!isDeleted);
     });
@@ -74,7 +123,6 @@ export default function BasicTable() {
     };
     const url = "http://localhost:5000/auth/api/put/apis";
     fetch(url, optionsEdit).then( res => res.json()).then( data => {
-      console.log(data) 
       setHashed(data["hashed_token"]);
       setIsEdit(true);
     });
@@ -137,11 +185,22 @@ export default function BasicTable() {
                       <TableCell align="right">{row.prefix}</TableCell>
                       <TableCell align="right">{row.scopes}</TableCell>
                       <TableCell align="right">{row.actions}</TableCell>
-
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
+              <div class="status">
+                {responseSummary.length ? (
+                  responseSummary.map((r) => (
+                    <CustomizedSnackbars
+                      content={r.content}
+                      severity={r.severity}
+                    />
+                  ))
+                ) : (
+                  <></>
+                )}
+              </div>
             </TableContainer>) : (null)
           }</div>
         ) : ( <Generate loaded={false} keys={hashed} setBack={setBack}/>)

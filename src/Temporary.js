@@ -31,7 +31,10 @@ function Temporary({api_key, setBack}) {
   const [isChanged, setIsChanged] = useState(false);
 
   const handleBack = (event, setBack) => {
-    setBack(true);
+    if(setBack)
+      setBack(true);
+    else
+      window.open('/dashboard?tab=1', "_self")
     setIsChanged(true);
   }
 
