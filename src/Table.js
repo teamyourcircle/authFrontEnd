@@ -42,7 +42,7 @@ export default function BasicTable() {
         setResponseSummary(responseSummary.length - 1, 1);
     }, 5000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDeleted]);
+  }, [isDeleted,isEdit]);
   const options = {
     method: 'GET',
     headers:{
@@ -123,6 +123,47 @@ export default function BasicTable() {
     };
     const url = "http://localhost:5000/auth/api/put/apis";
     fetch(url, optionsEdit).then( res => res.json()).then( data => {
+      console.log(data)
+      const status=data.statusCode;
+      if (status == 404) {
+        try {
+          setResponseSummary([
+            ...responseSummary,
+            {
+              status,
+              content: 'Failed to edit API',
+              severity: "error",
+            },
+          ]);
+        } catch (err) {
+          setResponseSummary([
+            {
+              status,
+              content: 'Failed to edit API',
+              severity: "error",
+            },
+          ]);
+        }
+      } else {
+        try {
+          setResponseSummary([
+            ...responseSummary,
+            {
+              status,
+              content: 'API edited successfully!',
+              severity: "success",
+            },
+          ]);
+        } catch (err) {
+          setResponseSummary([
+            {
+              status,
+              content: 'API edited successfully!',
+              severity: "success",
+            },
+          ]);
+        }
+      }
       setHashed(data["api_key"]);
       setIsEdit(true);
     });
@@ -189,16 +230,29 @@ export default function BasicTable() {
                 </TableBody>
               </Table>
               <div class="status">
-                {responseSummary.length ? (
-                  responseSummary.map((r) => (
-                    <CustomizedSnackbars
-                      content={r.content}
-                      severity={r.severity}
-                    />
-                  ))
-                ) : (
-                  <></>
-                )}
+                {
+                  isDeleted ?
+                  (responseSummary.length ? (
+                    responseSummary.map((r) => (
+                      <CustomizedSnackbars
+                        content={r.content}
+                        severity={r.severity}
+                      />
+                    ))
+                  ) : (
+                    <></>
+                  )) : (
+                    responseSummary.length && back ? (
+                      responseSummary.map((r) => (
+                        <CustomizedSnackbars
+                          content={r.content}
+                          severity={r.severity}
+                        />
+                      ))
+                    ) : (
+                      <></>
+                    ))
+                }
               </div>
             </TableContainer>) : (null)
           }</div>
