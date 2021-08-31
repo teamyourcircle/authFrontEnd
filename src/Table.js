@@ -119,18 +119,18 @@ export default function BasicTable() {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body:JSON.stringify({"pref": event.target.id})
+      body:JSON.stringify({"prefix": event.target.id})
     };
     const url = "http://localhost:5000/auth/api/put/apis";
     fetch(url, optionsEdit).then( res => res.json()).then( data => {
-      setHashed(data["hashed_token"]);
+      setHashed(data["api_key"]);
       setIsEdit(true);
     });
   }
   useEffect(() => {
     if(state.length){
       const array = state;
-      let setrows = [];  
+      let setrows = [];
       for(var i=0;i<array.length;i++){
         let s = array[i];
         setrows[i] = createData(s.name,s.prefix,s.scopes.join(', '), <React.Fragment>
@@ -154,7 +154,6 @@ export default function BasicTable() {
     const url = "http://localhost:5000/auth/api/get/apis";
     fetch(url,options).then(res =>res.json()).then(data=>{
       setstate(data.data);
-      console.log(data.data);
     })
   }, []);
 
