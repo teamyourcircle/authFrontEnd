@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import "./Login.css";
 import "./ForgotPassword.css";
 import { CustomizedSnackbars } from "@teamyourcircle/oauth-integration";
+import Navbar from './Navbar'
 
 function ForgotPassword() {
   const { REACT_APP_AUTH_SERVICE_BASE_URL } = process.env;
@@ -91,7 +92,12 @@ function ForgotPassword() {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <div className="back" style={{ background: "#28284E" }}></div>
+      <div className="forgot-nav">
+      <Navbar/>
+      </div>
+      <div className="back" style={{ background: "#28284E" }}>
+     
+      </div>
       {!isLoaded ? (
         <div className="forgot">
           <div className="forgot_container">

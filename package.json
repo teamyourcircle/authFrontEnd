@@ -8,6 +8,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/pickers": "^3.2.10",
+    "@material-ui/styles": "^4.11.4",
     "@teamyourcircle/form-validator": "^1.4.5",
     "@teamyourcircle/oauth-integration": "1.2.5",
     "@testing-library/jest-dom": "^4.2.4",
@@ -16,6 +17,7 @@
     "axios": "^0.20.0",
     "date-fns": "^2.15.0",
     "googleapis": "^67.0.0",
+    "javascript-time-ago": "^2.3.8",
     "js-cookie": "^2.2.1",
     "material-ui-popup-state": "^1.7.0",
     "materialize-css": "^1.0.0-rc.2",
@@ -25,6 +27,7 @@
     "react-google-login": "^5.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
+    "react-time-ago": "^7.1.1",
     "react-virtualized": "^9.22.2"
   },
   "scripts": {

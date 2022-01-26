@@ -1,0 +1,14 @@
+@media (min-width: 476px) and (max-width: 769px) {
+  
+    .universal-navbar {
+      width: 84%;
+  }
+
+  }
+
+  @media (min-width: 150px) and (max-width: 476px) {
+
+    .universal-navbar {
+      width: 81%;
+  }
+  }

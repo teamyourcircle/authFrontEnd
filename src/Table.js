@@ -84,7 +84,7 @@ export default function BasicTable() {
       let setrows = [];  
       for(var i=0;i<array.length;i++){
         let s = array[i];
-        setrows[i] = createData(s.name,s.prefix,s.scope.join(', '), <React.Fragment>
+        setrows[i] = createData(s.name,s.prefix,s.scopes.join(', '), <React.Fragment>
           <Button  onClick = {handleDelete} >
             <a id={`${s.prefix}`}>
             Delete
