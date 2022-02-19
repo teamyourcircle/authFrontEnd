@@ -4,11 +4,13 @@ import { AuthContext } from "./AuthContext";
 import FacebookLogin from "react-facebook-login";
 import FaceBookButton from "./FaceBookButton";
 import "./Facebook.css";
+import { useHistory } from "react-router-dom";
 
 function LoginFacebook({responseSummary,setResponseSummary,setisLoggedIn,context}) {
   const [isAuth, setAuth] = useContext(AuthContext);
   const [clientId, setClientId] = useState("");
   const { REACT_APP_AUTH_SERVICE_BASE_URL } = process.env;
+  const history = useHistory();
   useEffect(() => {
     fetch(REACT_APP_AUTH_SERVICE_BASE_URL + "/auth/api/app/credentials")
       .then((response) => response.json())
@@ -74,7 +76,7 @@ function LoginFacebook({responseSummary,setResponseSummary,setisLoggedIn,context
           }
           Cookies.set("Token", data.token);
           Cookies.set("isAuth", isAuth);
-          // window.open("/dashboard", "_self");
+          history.push("/dashboard");
         }
         setisLoggedIn(false);
       });
