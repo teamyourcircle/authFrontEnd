@@ -10,7 +10,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import clsx from "clsx";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 import "./Login.css";
 import { CustomizedSnackbars } from "@teamyourcircle/oauth-integration";
@@ -28,6 +28,7 @@ function Login(props) {
   const [isAuth, setAuth] = useContext(AuthContext);
   const [isLoggedin, setisLoggedIn] = useState(false);
   const [responseSummary, setResponseSummary] = useState([]);
+  const history = useHistory();
   useEffect(() => {
     setTimeout(() => {
       if (responseSummary.length)
@@ -125,7 +126,7 @@ function Login(props) {
             }
             Cookies.set("Token", data.token);
             Cookies.set("isAuth", isAuth);
-            // window.open("/dashboard", "_self");
+            history.push("/dashboard");
           }
           setisLoggedIn(false);
         });
@@ -164,8 +165,7 @@ function Login(props) {
                       <div class="mobile_look"></div>
                     </div>
                     <h2>LOGIN</h2>
-                    <form onSubmit={postData}>
-                      <div className="more">
+                    <div className="more">
                         <AuthContextProvider>
                           <LoginGoogle
                             responseSummary={responseSummary}
@@ -181,6 +181,7 @@ function Login(props) {
                           />
                         </AuthContextProvider>
                       </div>
+                    <form onSubmit={postData}>
                       <svg
                         width="443"
                         height="37"
