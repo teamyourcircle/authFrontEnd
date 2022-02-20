@@ -54,6 +54,12 @@ function Dashboard() {
   const url = 'http://localhost:5000/auth/api/dashboard'
   const [is_Auth, setAuth, token, setToken] = useContext(AuthContext);
   const [isLoaded, setisLoaded] = useState(false);
+  const [email, setEmail] = useState('');
+  const search = useLocation().search;
+  const tabIndex = new URLSearchParams(search).get('tab');
+  const [value, setValue] = useState(parseInt(tabIndex));
+  // const [value, setValue] = useState(0);
+  const [isVerified, setisVerified] = useState(true);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -67,12 +73,7 @@ function Dashboard() {
       'Accept': 'application/json'
     }
   };
-  const [email, setEmail] = useState('');
-  const search = useLocation().search;
-  const tabIndex = new URLSearchParams(search).get('tab');
-  const [value, setValue] = useState(parseInt(tabIndex));
-  const [isVerified, setisVerified] = useState(true);
-
+  
   useEffect(() => {
     fetch(url, options).then(response => response.json()).then(data => {
       setEmail(data.email);
@@ -82,6 +83,7 @@ function Dashboard() {
     })
 
   }, [is_Auth])
+
   //create token
   const sendLink = async () => {
     const options = {

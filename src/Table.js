@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 function createData(name, prefix, scopes, actions) {
   return { name, prefix, scopes, actions };
 }
-var rows=[];
+
 export default function BasicTable() {
   const classes = useStyles();
   const [isDeleted, setIsDeleted] = React.useState(false);
@@ -36,79 +36,111 @@ export default function BasicTable() {
   const [is_Auth,setAuth,token,setToken] = useContext(AuthContext);
   const [isloaded, setisloaded] = useState(false);
   const [back, setBack] = useState(false);
+  const [rows,setRows] = useState([]);
   useEffect(() => {
     setTimeout(() => {
       if (responseSummary.length)
         setResponseSummary(responseSummary.length - 1, 1);
-    }, 5000);
+    }, 2000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDeleted,isEdit]);
-  const options = {
-    method: 'GET',
-    headers:{
-      'access-token':token,
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    }
-  };
 
-  const handleDelete = event => {
-    var pf = event.target.id;
-    const optionsDel = {
-      method: 'DELETE',
+  //fetch all api's
+  useEffect(() => {
+    const options = {
+      method: 'GET',
       headers:{
         'access-token':token,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-      },
-      body:JSON.stringify({"prefix": pf})
-    };
-    const url = "http://localhost:5000/auth/api/delete/apis";
-    fetch(url, optionsDel).then( res => res.json()).then( data => {
-      let newArr = state.filter( (d,i) => { if(d['prefix'] !== pf) return d });
-      const status = data.statusCode;
-      if (status != 200) {
-        try {
-          setResponseSummary([
-            ...responseSummary,
-            {
-              status,
-              content: data.msg,
-              severity: "error",
-            },
-          ]);
-        } catch (err) {
-          setResponseSummary([
-            {
-              status,
-              content: data.msg,
-              severity: "error",
-            },
-          ]);
-        }
-      } else {
-        try {
-          setResponseSummary([
-            ...responseSummary,
-            {
-              status,
-              content: data.msg,
-              severity: "success",
-            },
-          ]);
-        } catch (err) {
-          setResponseSummary([
-            {
-              status,
-              content: data.msg,
-              severity: "success",
-            },
-          ]);
-        }
       }
-      setstate(newArr);
-      setIsDeleted(!isDeleted);
-    });
+    };
+    const url = "http://localhost:5000/auth/api/get/apis";
+    fetch(url,options).then(res =>res.json()).then(data=>{
+      setstate(data.data);
+    })
+  }, []);
+
+  //adding action to each row
+  useEffect(() => {
+    let newArr=[];
+    for(let i=0;i<state.length;i++){
+      const {name,prefix,scopes} = state[i];
+      newArr.push(createData(name,prefix,scopes.join(', '), <React.Fragment>
+      <Button  onClick = {handleDelete} >
+        <a id={`${prefix}`}>
+        Delete
+        </a>
+      </Button>
+      <Button  onClick = {handleEdit} >
+        <a id={`${prefix}`}>
+        Edit
+        </a>
+      </Button></React.Fragment>));
+    }
+    setRows(newArr);
+    setisloaded(true);
+  }, [state]);
+
+  const handleDelete = event => {
+    var pf = event.target.id;
+    if(window.confirm("You are about to delete this API key!!!")){
+      const optionsDel = {
+        method: 'DELETE',
+        headers:{
+          'access-token':token,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body:JSON.stringify({"prefix": pf})
+      };
+      const url = "http://localhost:5000/auth/api/delete/apis";
+      fetch(url, optionsDel).then( res => res.json()).then( data => {
+        const status = data.statusCode;
+        if (status != 200) {
+          try {
+            setResponseSummary([
+              ...responseSummary,
+              {
+                status,
+                content: data.msg,
+                severity: "error",
+              },
+            ]);
+          } catch (err) {
+            setResponseSummary([
+              {
+                status,
+                content: data.msg,
+                severity: "error",
+              },
+            ]);
+          }
+        } else {
+          try {
+            setResponseSummary([
+              ...responseSummary,
+              {
+                status,
+                content: data.msg,
+                severity: "success",
+              },
+            ]);
+          } catch (err) {
+            setResponseSummary([
+              {
+                status,
+                content: data.msg,
+                severity: "success",
+              },
+            ]);
+          }
+          let newArr = state.filter( (d,i) => { if(d['prefix'] !== pf) return d });
+          setIsDeleted(!isDeleted);
+          setstate(newArr);
+        }
+      });
+    }
   }
 
   const handleEdit = event => {
@@ -168,35 +200,6 @@ export default function BasicTable() {
       setIsEdit(true);
     });
   }
-  useEffect(() => {
-    if(state.length){
-      const array = state;
-      let setrows = [];
-      for(var i=0;i<array.length;i++){
-        let s = array[i];
-        setrows[i] = createData(s.name,s.prefix,s.scopes.join(', '), <React.Fragment>
-          <Button  onClick = {handleDelete} >
-            <a id={`${s.prefix}`}>
-            Delete
-            </a>
-          </Button>
-          <Button  onClick = {handleEdit} >
-            <a id={`${s.prefix}`}>
-            Edit
-            </a>
-          </Button></React.Fragment>)
-      }
-      rows = setrows;
-      setisloaded(true)
-    }
-  }, [state]);
-
-  useEffect(() => {
-    const url = "http://localhost:5000/auth/api/get/apis";
-    fetch(url,options).then(res =>res.json()).then(data=>{
-      setstate(data.data);
-    })
-  }, []);
 
   useEffect(() => {
     console.log('isBacked ? '+back)
@@ -219,14 +222,15 @@ export default function BasicTable() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row) => (
-                    <TableRow key={row.name}>
-                      <TableCell component="th" scope="row">{row.name}</TableCell>
-                      <TableCell align="right">{row.prefix}</TableCell>
-                      <TableCell align="right">{row.scopes}</TableCell>
-                      <TableCell align="right">{row.actions}</TableCell>
+                  {console.log(rows)}
+                  {rows.length?rows.map(({name,prefix,scopes,actions}) => (
+                    <TableRow key={name}>
+                      <TableCell component="th" scope="row">{name}</TableCell>
+                      <TableCell align="right">{prefix}</TableCell>
+                      <TableCell align="right">{scopes}</TableCell>
+                      <TableCell align="right">{actions}</TableCell>
                     </TableRow>
-                  ))}
+                  )) : (<></>)}
                 </TableBody>
               </Table>
               <div class="status">

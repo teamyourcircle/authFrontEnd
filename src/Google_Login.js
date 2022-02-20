@@ -72,7 +72,7 @@ function LoginGoogle({responseSummary,setResponseSummary,setisLoggedIn,context})
         }
         Cookies.set("Token", data.token);
         Cookies.set("isAuth", isAuth);
-        history.push("/dashboard");
+        history.push("/dashboard?tab=0");
       }
       setisLoggedIn(false);
     });
