@@ -7,9 +7,9 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import DeleteIcon from '@material-ui/icons/Delete';
+import deleteLogo from "./images/deleteIcon.png";
+import editLogo from "./images/editIcon.png"
 import Button from '@material-ui/core/Button';
-import EditIcon from '@material-ui/icons/Edit';
 import { AuthContext} from './AuthContext'
 import Generate from "./Generate";
 import { CustomizedSnackbars } from "@teamyourcircle/oauth-integration";
@@ -68,14 +68,10 @@ export default function BasicTable() {
       const {name,prefix,scopes} = state[i];
       newArr.push(createData(name,prefix,scopes.join(', '), <React.Fragment>
       <Button  onClick = {handleDelete} >
-        <a id={`${prefix}`}>
-        Delete
-        </a>
+        <a><img id={`${prefix}`} src={deleteLogo} alt={"DELETE"}></img></a>
       </Button>
       <Button  onClick = {handleEdit} >
-        <a id={`${prefix}`}>
-        Edit
-        </a>
+        <a><img id={`${prefix}`} src={editLogo} alt={"EDIT"}></img></a>
       </Button></React.Fragment>));
     }
     setRows(newArr);
