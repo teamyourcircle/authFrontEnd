@@ -2,12 +2,14 @@ import React, { useEffect, useContext, useState } from "react";
 import Cookies from "js-cookie";
 import { GoogleLogin } from "react-google-login";
 import { AuthContext } from "./AuthContext";
+import { useHistory } from "react-router-dom";
 import "./Google.css";
 
 function LoginGoogle({responseSummary,setResponseSummary,setisLoggedIn,context}) {
   const {REACT_APP_AUTH_SERVICE_BASE_URL} = process.env;
   const [isAuth, setAuth] = useContext(AuthContext);
   const [clientId,setClientId] = useState('');
+  const history = useHistory();
   useEffect(() => {
     fetch(REACT_APP_AUTH_SERVICE_BASE_URL+"/auth/api/app/credentials").then(response => response.json()).then(data => {
       console.log(data);
@@ -70,7 +72,7 @@ function LoginGoogle({responseSummary,setResponseSummary,setisLoggedIn,context})
         }
         Cookies.set("Token", data.token);
         Cookies.set("isAuth", isAuth);
-        // window.open("/dashboard", "_self");
+        history.push("/dashboard?tab=0");
       }
       setisLoggedIn(false);
     });

@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import './Dashboard.css';
 import Skeleton from '@material-ui/lab/Skeleton';
+import {useLocation} from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import { AuthContext } from './AuthContext'
 import Button from '@material-ui/core/Button';
@@ -53,7 +54,12 @@ function Dashboard() {
   const url = 'http://localhost:5000/auth/api/dashboard'
   const [is_Auth, setAuth, token, setToken] = useContext(AuthContext);
   const [isLoaded, setisLoaded] = useState(false);
-  const [value, setValue] = React.useState(0);
+  const [email, setEmail] = useState('');
+  const search = useLocation().search;
+  const tabIndex = new URLSearchParams(search).get('tab');
+  const [value, setValue] = useState(parseInt(tabIndex));
+  // const [value, setValue] = useState(0);
+  const [isVerified, setisVerified] = useState(true);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -67,8 +73,7 @@ function Dashboard() {
       'Accept': 'application/json'
     }
   };
-  const [email, setEmail] = useState('');
-  const [isVerified, setisVerified] = useState(true);
+  
   useEffect(() => {
     fetch(url, options).then(response => response.json()).then(data => {
       setEmail(data.email);
@@ -78,7 +83,8 @@ function Dashboard() {
     })
 
   }, [is_Auth])
-  //create token 
+
+  //create token
   const sendLink = async () => {
     const options = {
       method: 'GET',

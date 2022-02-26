@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './Temporary.css';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,12 +23,27 @@ const useStyles = makeStyles({
       color: "#28284E"
     }
   },
- 
 });
-function Temporary({api_key}) {
+
+function Temporary({api_key, setBack}) {
   const classes = useStyles();
+
+  const [isChanged, setIsChanged] = useState(false);
+
+  const handleBack = (event, setBack) => {
+    if(setBack)
+      setBack(true);
+    else
+      window.open('/dashboard?tab=1', "_self")
+    setIsChanged(true);
+  }
+
+  useEffect(() => {
+    console.log('back : '+isChanged)
+  }, [isChanged]);
+
     return (
-        <div className="App_token">
+      <div className="App_token">
         <div className="key_api">
           <div className="key_header">
             <h1>Your API key</h1>
@@ -46,8 +61,8 @@ function Temporary({api_key}) {
           </div>
         </div>
         <div className="button-container">
-              <Button className={classes.button}>Back</Button>
-            </div>
+          <Button className={classes.button} onClick={(e) => handleBack(e,setBack)}>Back</Button>
+        </div>
       </div>
     );
 }

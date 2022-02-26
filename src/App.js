@@ -13,6 +13,7 @@ import ProtectedRoute from './ProtectedRoute';
 import Products from './Products'
 import Generate from './Generate'
 import Integration from './Integration';
+import ChangePassword from './ChangePassword';
 function App() {
    console.log(process.env);
    return (
@@ -24,7 +25,8 @@ function App() {
          <Route path="/signup"><SignUp /></Route>
        <AuthContextProvider>
        <Route path="/signout"><SignOut /></Route>
-       <Route path="/login"><Login /></Route> 
+       <Route path="/login"><Login /></Route>
+       <Route path="/changepassword"><ChangePassword /></Route>
        <ProtectedRoute path="/dashboard" component={() => <React.Fragment><div className="layout"><Dashboard />
        {/* <Products /> */}
        </div></React.Fragment>} />
